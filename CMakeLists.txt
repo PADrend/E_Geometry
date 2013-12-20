@@ -48,7 +48,7 @@ target_link_libraries(E_Geometry LINK_PUBLIC EScript)
 
 # Dependency to Geometry
 if(NOT TARGET Geometry)
-	find_package(Geometry 0.1.3 REQUIRED NO_MODULE)
+	find_package(Geometry 0.2.0 REQUIRED NO_MODULE)
 endif()
 target_link_libraries(E_Geometry LINK_PUBLIC Geometry)
 
