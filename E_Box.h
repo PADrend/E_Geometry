@@ -37,10 +37,15 @@ class E_Box : public EScript::ReferenceObject<Geometry::Box> {
 };
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Box,		Geometry::_Box<int32_t>,
+					Geometry::_Box<int32_t>(	Geometry::_Vec3<int32_t>((**eObj).getMin()),
+												Geometry::_Vec3<int32_t>((**eObj).getMax())))
 ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Box,		Geometry::Box,		**eObj)
 ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Box,		Geometry::Box&,		**eObj)
 ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Box,		Geometry::Box*,		&**eObj)
-ES_CONV_OBJ_TO_EOBJ(const Geometry::Box&, 	E_Geometry::E_Box,	new E_Geometry::E_Box(obj))
-ES_CONV_OBJ_TO_EOBJ(Geometry::Box&&, 		E_Geometry::E_Box,	new E_Geometry::E_Box(obj))
+ES_CONV_OBJ_TO_EOBJ(const Geometry::_Box<int32_t>&,		E_Geometry::E_Box,	
+					new E_Geometry::E_Box( Geometry::Vec3(obj.getMin()),Geometry::Vec3(obj.getMax())))
+ES_CONV_OBJ_TO_EOBJ(const Geometry::Box&,				E_Geometry::E_Box,	new E_Geometry::E_Box(obj))
+ES_CONV_OBJ_TO_EOBJ(Geometry::Box&&, 					E_Geometry::E_Box,	new E_Geometry::E_Box(obj))
 
 #endif // __EBox_H
