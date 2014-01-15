@@ -15,6 +15,16 @@
 #include <Geometry/Vec4.h>
 #include <sstream>
 
+namespace EScript{
+template<> Geometry::Vec4 convertTo<Geometry::Vec4>(Runtime & rt,ObjPtr obj){
+	Array * arr = obj.toType<Array>();
+	if(arr){
+		return Geometry::Vec4( arr->at(0).toDouble(), arr->at(1).toDouble(), arr->at(2).toDouble(), arr->at(3).toDouble());
+	}
+	return Geometry::Vec4(**assertType<E_Geometry::E_Vec4>(rt,obj));
+}
+}
+
 namespace E_Geometry {
 
 //! (static)

@@ -15,6 +15,15 @@
 #include <cstddef>
 #include <sstream>
 
+namespace EScript{
+template<> Geometry::Vec3 convertTo<Geometry::Vec3>(Runtime & rt,ObjPtr obj){
+	Array * arr = obj.toType<Array>();
+	if(arr){
+		return Geometry::Vec3( arr->at(0).toDouble(), arr->at(1).toDouble(), arr->at(2).toDouble() );
+	}
+	return Geometry::Vec3(**assertType<E_Geometry::E_Vec3>(rt,obj));
+}
+}
 namespace E_Geometry {
 
 //! (static)
@@ -33,15 +42,7 @@ void E_Vec3::init(EScript::Namespace & lib) {
 	//!	[ESMF] Vec3 new Vec3([ x,y,z | Vec3 | Array])
 	ES_CONSTRUCTOR(typeObject,0,3,{
 		if(parameter.count()==1){
-
-			E_Vec3 * v2=parameter[0].toType<E_Vec3>();
-			if(v2){
-				return EScript::create(**v2);
-			}else {
-				const EScript::Array * a = parameter[0].to<EScript::Array*>(rt);
-				return new E_Vec3(a->at(0).toFloat(), a->at(1).toFloat(), a->at(2).toFloat());
-			}
-
+			return EScript::create(parameter[0].to<Vec3>(rt));
 		}else if(parameter.count()==3){
 			return new E_Vec3(parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt));
 		}else {
@@ -59,19 +60,19 @@ void E_Vec3::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,const Vec3,"_-_pre",0,0,	std::move(-(*thisObj)))
 
 	//!	[ESMF] Vec3 Vec3.+(Vec3)
-	ES_MFUN(typeObject,const Vec3,"+",1,1,		std::move((*thisObj) + (parameter[0].to<const Vec3&>(rt))))
+	ES_MFUN(typeObject,const Vec3,"+",1,1,		std::move((*thisObj) + (parameter[0].to<Vec3>(rt))))
 
 	//!	[ESMF] Vec3 Vec3.-(Vec3)
-	ES_MFUN(typeObject,const Vec3,"-",1,1,		std::move((*thisObj) - (parameter[0].to<const Vec3&>(rt))))
+	ES_MFUN(typeObject,const Vec3,"-",1,1,		std::move((*thisObj) - (parameter[0].to<Vec3>(rt))))
 
 	//!	[ESMF] Vec3 Vec3./(number)
 	ES_MFUN(typeObject,const Vec3,"/",	1,1,	std::move((*thisObj) / parameter[0].to<float>(rt)))
 
 	//!	[ESMF] Vec3 Vec3.+=(Vec3)
-	ES_MFUN(typeObject,Vec3,"+=",1,1,			((*thisObj) +=  (parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Vec3,"+=",1,1,			((*thisObj) +=  (parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//!	[ESMF] Vec3 Vec3.-=(Vec3)
-	ES_MFUN(typeObject,Vec3,"-=",1,1,			((*thisObj) -=  (parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Vec3,"-=",1,1,			((*thisObj) -=  (parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//!	[ESMF] Vec3 Vec3.*=(Number)
 	ES_MFUN(typeObject,Vec3,"*=",1,1,			((*thisObj) *=  parameter[0].to<float>(rt),thisEObj))
@@ -80,23 +81,23 @@ void E_Vec3::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Vec3,"/=",1,1,			((*thisObj) /=  parameter[0].to<float>(rt),thisEObj))
 
 	//! [ESMF] Vec3 Vec3.cross(Vec3)
-	ES_MFUN(typeObject, const Vec3,"cross", 1, 1, thisObj->cross(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject, const Vec3,"cross", 1, 1, thisObj->cross(parameter[0].to<Vec3>(rt)))
 
 	//!	[ESMF] Number Vec3.distance(Vec3)
-	ES_MFUN(typeObject,const Vec3,"distance",1,1,	thisObj->distance(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject,const Vec3,"distance",1,1,	thisObj->distance(parameter[0].to<Vec3>(rt)))
 
 	//!	[ESMF] Number Vec3.distanceSquared(Vec3)
-	ES_MFUN(typeObject, const Vec3,"distanceSquared", 1, 1, thisObj->distanceSquared(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject, const Vec3,"distanceSquared", 1, 1, thisObj->distanceSquared(parameter[0].to<Vec3>(rt)))
 
 	//!	[ESMF] Number Vec3.dot(Vec3)
-	ES_MFUN(typeObject,const Vec3,"dot",	1,1,	thisObj->dot(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject,const Vec3,"dot",	1,1,	thisObj->dot(parameter[0].to<Vec3>(rt)))
 
 	//!	[ESMF] Vec3 Vec3.getNormalized()
 	ES_MFUN(typeObject,const Vec3,"getNormalized",0,0,thisObj->getNormalized())
 
 	//!	[ESMF] Vec3 Vec3.getProjection(Vec3 planeBase,Vec3 planeNormal)
 	ES_MFUN(typeObject,const Vec3,"getProjection",2,2,thisObj->getProjection(
-								parameter[0].to<const Vec3&>(rt),parameter[1].to<const Vec3&>(rt)))
+								parameter[0].to<Vec3>(rt),parameter[1].to<Vec3>(rt)))
 
 	//!	[ESMF] Number Vec3.getX()
 	ES_MFUN(typeObject,const Vec3,"getX",0,0,		thisObj->getX())
@@ -123,7 +124,7 @@ void E_Vec3::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Vec3,"normalize",	0,0,	(thisObj->normalize(),thisEObj))
 
 	//!	[ESMF] caller Vec3.reflect(Vec3)
-	ES_MFUN(typeObject,Vec3,"reflect",1,1,			(thisObj->reflect(parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Vec3,"reflect",1,1,			(thisObj->reflect(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//!	[ESMF] thisObj Vec3.setValue( Number,Number,Number | Array | Vec3)
 	ES_MFUNCTION(typeObject,Vec3,"setValue",0,3,{

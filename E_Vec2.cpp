@@ -14,6 +14,17 @@
 #include <Geometry/Vec2.h>
 #include <sstream>
 
+
+namespace EScript{
+template<> Geometry::Vec2 convertTo<Geometry::Vec2>(Runtime & rt,ObjPtr obj){
+	Array * arr = obj.toType<Array>();
+	if(arr){
+		return Geometry::Vec2( arr->at(0).toDouble(), arr->at(1).toDouble() );
+	}
+	return Geometry::Vec2(**assertType<E_Geometry::E_Vec2>(rt,obj));
+}
+}
+
 namespace E_Geometry {
 
 //! (static)
@@ -34,7 +45,7 @@ void E_Vec2::init(EScript::Namespace & lib) {
 		assertParamCount(rt,parameter,0,2);
 
 		if(parameter.count()==1){
-			return EScript::create(parameter[0].to<const Vec2&>(rt));
+			return EScript::create(parameter[0].to<Vec2>(rt));
 		}else if(parameter.count()==2){
 			return new E_Vec2(Vec2(parameter[0].to<float>(rt),parameter[1].to<float>(rt)));
 		}else {
@@ -49,10 +60,10 @@ void E_Vec2::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Vec2,"_-_pre",0,0, - (*thisObj))
 
 	//! [ESMF] E_Vec2 E_Vec2.+(E_Vec2)
-	ES_MFUN(typeObject,Vec2,"+",1,1, (*thisObj) + (parameter[0].to<const Vec2&>(rt)))
+	ES_MFUN(typeObject,Vec2,"+",1,1, (*thisObj) + (parameter[0].to<Vec2>(rt)))
 
 	//! [ESMF] E_Vec2 E_Vec2.-(E_Vec2)
-	ES_MFUN(typeObject,Vec2,"-",1,1, (*thisObj) - (parameter[0].to<const Vec2&>(rt)))
+	ES_MFUN(typeObject,Vec2,"-",1,1, (*thisObj) - (parameter[0].to<Vec2>(rt)))
 
 	//! [ESMF] E_Vec2 E_Vec2.*(number)
 	ES_MFUN(typeObject,Vec2,"*",1,1,(*thisObj) * parameter[0].to<float>(rt))
@@ -61,10 +72,10 @@ void E_Vec2::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Vec2,"/",1,1,(*thisObj) / parameter[0].to<float>(rt))
 
 	//! [ESMF] E_Vec2 E_Vec2.+=(E_Vec2)
-	ES_MFUN(typeObject,Vec2,"+=",1,1,(*thisObj += (parameter[0].to<const Vec2&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Vec2,"+=",1,1,(*thisObj += (parameter[0].to<Vec2>(rt)),thisEObj))
 
 	//! [ESMF] E_Vec2 E_Vec2.-=(E_Vec2)
-	ES_MFUN(typeObject,Vec2,"-=",1,1,(*thisObj -= (parameter[0].to<const Vec2&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Vec2,"-=",1,1,(*thisObj -= (parameter[0].to<Vec2>(rt)),thisEObj))
 
 	//! [ESMF] E_Vec2 E_Vec2.*=(Number)
 	ES_MFUN(typeObject,Vec2,"*=",1,1,(*thisObj *= parameter[0].to<double>(rt),thisEObj))
@@ -76,10 +87,10 @@ void E_Vec2::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Vec2,"isZero",0,0,thisObj->isZero())
 
 	//! [ESMF] Number E_Vec2.distance(E_Vec2)
-	ES_MFUN(typeObject,Vec2,"distance",1,1,thisObj->distance(parameter[0].to<const Vec2&>(rt)))
+	ES_MFUN(typeObject,Vec2,"distance",1,1,thisObj->distance(parameter[0].to<Vec2>(rt)))
 
 	//! [ESMF] Number E_Vec2.dot(E_Vec2)
-	ES_MFUN(typeObject,Vec2,"dot",1,1,thisObj->dot(parameter[0].to<const Vec2&>(rt)))
+	ES_MFUN(typeObject,Vec2,"dot",1,1,thisObj->dot(parameter[0].to<Vec2>(rt)))
 
 	//! [ESMF] self E_Vec2.normalize()
 	ES_MFUN(typeObject,Vec2,"normalize",0,0,(thisObj->normalize(),thisEObj))
