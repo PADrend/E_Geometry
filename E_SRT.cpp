@@ -45,15 +45,15 @@ void E_SRT::init(EScript::Namespace & lib) {
 								parameter[1].to<const SRT&>(rt),
 								parameter[2].to<float>(rt));
 		} else {
-			const Vec3 & pos = parameter[0].to<const Vec3&>(rt);
-			const Vec3 & dir = parameter[1].to<const Vec3&>(rt);
-			const Vec3 & up = parameter[2].to<const Vec3&>(rt);
+			const Vec3 & pos = parameter[0].to<Vec3>(rt);
+			const Vec3 & dir = parameter[1].to<Vec3>(rt);
+			const Vec3 & up = parameter[2].to<Vec3>(rt);
 			return new E_SRT(pos, dir, up, parameter[3].toFloat(1.0f));
 		}
 	})
 	
 	//! [ESMF] Vec3 SRT.applyRotation(Vec3)
-	ES_MFUN(typeObject,SRT, "applyRotation", 1, 1, std::move(thisObj->getRotation() * (parameter[0].to<const Vec3&>(rt))))
+	ES_MFUN(typeObject,SRT, "applyRotation", 1, 1, std::move(thisObj->getRotation() * (parameter[0].to<Vec3>(rt))))
 
 	//! [ESMF] Vec3 SRT.getDirVector()
 	ES_MFUN(typeObject,SRT, "getDirVector", 0, 0, std::move(thisObj->getDirVector()))
@@ -79,22 +79,22 @@ void E_SRT::init(EScript::Namespace & lib) {
 	//! [ESMF] self SRT.rotateLocal_deg(Number, Vec3 axis)
 	ES_MFUN(typeObject,SRT, "rotateLocal_deg", 2, 2, (thisObj->rotateLocal_deg(
 			parameter[0].to<float>(rt),
-			parameter[1].to<const Vec3&>(rt)),thisEObj))
+			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self SRT.rotateLocal_rad(Number, Vec3 axis)
 	ES_MFUN(typeObject,SRT, "rotateLocal_rad", 2, 2, (thisObj->rotateLocal_rad(
 			parameter[0].to<float>(rt),
-			parameter[1].to<const Vec3&>(rt)),thisEObj))
+			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self SRT.rotateRel_deg(Number, Vec3 axis)
 	ES_MFUN(typeObject,SRT, "rotateRel_deg", 2, 2, (thisObj->rotateRel_deg(
 			parameter[0].to<float>(rt),
-			parameter[1].to<const Vec3&>(rt)),thisEObj))
+			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self SRT.rotateRel_rad(Number, Vec3 axis)
 	ES_MFUN(typeObject,SRT, "rotateRel_rad", 2, 2, (thisObj->rotateRel_rad(
 			parameter[0].to<float>(rt),
-			parameter[1].to<const Vec3&>(rt)),thisEObj))
+			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self SRT.scale(Number)
 	ES_MFUN(typeObject,SRT, "scale", 1, 1, (thisObj->scale(parameter[0].to<float>(rt)),thisEObj))
@@ -102,7 +102,7 @@ void E_SRT::init(EScript::Namespace & lib) {
 	//! [ESMF] self SRT.setRotation( (Vec3 dir, Vec3 up) | Quaternion | Matrix3x3 )
 	ES_MFUN(typeObject,SRT, "setRotation", 1, 2, (
 		parameter.count() == 2 ?
-			thisObj->setRotation(parameter[0].to<const Vec3&>(rt), parameter[1].to<const Vec3&>(rt)) :
+			thisObj->setRotation(parameter[0].to<Vec3>(rt), parameter[1].to<Vec3>(rt)) :
 			(parameter[0].toType<E_Matrix3x3>() ?
 					thisObj->setRotation(parameter[0].to<const Matrix3x3&>(rt)) :
 					thisObj->setRotation((parameter[0].to<Quaternion&>(rt)).toMatrix()))
@@ -113,7 +113,7 @@ void E_SRT::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self SRT.setTranslation(Vec3 pos)
 	ES_MFUN(typeObject,SRT, "setTranslation", 1, 1, (thisObj->setTranslation(
-		parameter[0].to<const Vec3&>(rt)),thisEObj))
+		parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//! [ESF] self SRT.setValue( [SRT] | pos, dir, up[, scale] | srt1, srt2, blend )
 	ES_MFUNCTION(typeObject, SRT, "setValue", 0, 4, {
@@ -127,19 +127,19 @@ void E_SRT::init(EScript::Namespace & lib) {
 								parameter[1].to<const SRT&>(rt),
 								parameter[2].to<float>(rt));
 		} else {
-			const Vec3 & pos = parameter[0].to<const Vec3&>(rt);
-			const Vec3 & dir = parameter[1].to<const Vec3&>(rt);
-			const Vec3 & up = parameter[2].to<const Vec3&>(rt);
+			const Vec3 & pos = parameter[0].to<Vec3>(rt);
+			const Vec3 & dir = parameter[1].to<Vec3>(rt);
+			const Vec3 & up = parameter[2].to<Vec3>(rt);
 			*thisObj = SRT(pos, dir, up, parameter[3].toFloat(1.0f));
 		}
 		return thisEObj;
 	})
 
 	//! [ESMF] self SRT.translate(Vec3)
-	ES_MFUN(typeObject,SRT, "translate", 1, 1, (thisObj->translate(parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,SRT, "translate", 1, 1, (thisObj->translate(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self SRT.translateLocal(Vec3)
-	ES_MFUN(typeObject,SRT, "translateLocal", 1, 1, (thisObj->translateLocal(parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,SRT, "translateLocal", 1, 1, (thisObj->translateLocal(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] Vec3|SRT SRT.mul(Vec3|SRT)
 	ES_MFUNCTION(typeObject,const SRT, "*", 1, 1, {

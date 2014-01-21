@@ -43,15 +43,15 @@ void E_Plane::init(EScript::Namespace & lib) {
 			// Vec3 pos, Vec3 normal
 			E_Vec3 * eNormal = parameter[1].toType<E_Vec3>();
 			if(eNormal){
-				return new E_Plane(parameter[0].to<const Vec3&>(rt),**eNormal);
+				return new E_Plane(parameter[0].to<Vec3>(rt),**eNormal);
 			}else{ // Vec3 normal, Number distance
-				return new E_Plane(parameter[0].to<const Vec3&>(rt),parameter[1].to<float>(rt));
+				return new E_Plane(parameter[0].to<Vec3>(rt),parameter[1].to<float>(rt));
 			}
 		}else{ // Vec3,Vec3,Vec3
 			assertParamCount(rt,parameter,3,3);
-			return new E_Plane(	parameter[0].to<const Vec3&>(rt),
-								parameter[1].to<const Vec3&>(rt),
-								parameter[2].to<const Vec3&>(rt));
+			return new E_Plane(	parameter[0].to<Vec3>(rt),
+								parameter[1].to<Vec3>(rt),
+								parameter[2].to<Vec3>(rt));
 		}
 	})
 
@@ -80,16 +80,16 @@ void E_Plane::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Plane,"getOffset",0,0,	thisObj->getOffset())
 
 	//! [ESMF] Vec3 Plane.getProjection(Vec3)
-	ES_MFUN(typeObject,Plane,"getProjection",1,1,std::move(thisObj->getProjection(parameter[0].to<const Vec3&>(rt))))
+	ES_MFUN(typeObject,Plane,"getProjection",1,1,std::move(thisObj->getProjection(parameter[0].to<Vec3>(rt))))
 
 	//! [ESMF] Bool Plane.isUndefined()
 	ES_MFUN(typeObject,Plane,"isUndefined",0,0,	thisObj->isUndefined())
 
 		//! [ESMF] Numer Plane.planeTest(Vec3)
-	ES_MFUN(typeObject,Plane,"planeTest",1,1,	thisObj->planeTest(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject,Plane,"planeTest",1,1,	thisObj->planeTest(parameter[0].to<Vec3>(rt)))
 
 	//! [ESMF] self Plane.setNormal(Vec3)
-	ES_MFUN(typeObject,Plane,"setNormal",1,1,	(thisObj->setNormal(parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Plane,"setNormal",1,1,	(thisObj->setNormal(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self Plane.setOffset(Number)
 	ES_MFUN(typeObject,Plane,"setOffset",1,1,	(thisObj->setOffset(parameter[0].to<float>(rt)),thisEObj))

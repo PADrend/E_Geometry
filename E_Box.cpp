@@ -78,10 +78,10 @@ void E_Box::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Box, "getBoundingSphereRadius", 0, 0,thisObj->getBoundingSphereRadius())
 
 	//! [ESMF] float E_Box.getDistance( Vec3 )
-	ES_MFUN(typeObject,Box,"getDistance",1,1,thisObj->getDistance(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject,Box,"getDistance",1,1,thisObj->getDistance(parameter[0].to<Vec3>(rt)))
 
 	//! [ESMF] float E_Box.getDistanceSquared( Vec3 )
-	ES_MFUN(typeObject,Box,"getDistanceSquared",1,1,thisObj->getDistanceSquared(parameter[0].to<const Vec3&>(rt)))
+	ES_MFUN(typeObject,Box,"getDistanceSquared",1,1,thisObj->getDistanceSquared(parameter[0].to<Vec3>(rt)))
 
 	//! [ESMF] number E_Box.getExtentMax( )
 	ES_MFUN(typeObject,Box,"getExtentMax",0,0,thisObj->getExtentMax())
@@ -218,7 +218,7 @@ void E_Box::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] self E_Box.translate( E_Vec3  )
-	ES_MFUN(typeObject,Box,"translate",1,1,	(thisObj->translate(parameter[0].to<const Vec3&>(rt)),thisEObj))
+	ES_MFUN(typeObject,Box,"translate",1,1,	(thisObj->translate(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	// TODO!!!!
 

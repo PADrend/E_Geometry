@@ -70,7 +70,7 @@ void E_PointOctree::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,const PointOctree_EObj,"getBox",0,0,thisObj->getBox())
 
 	//! [ESMF] self PointOctree.insert(Vec3 pos, Object data)
-	ES_MFUN(typeObject,PointOctree_EObj,"insert",2,2,(thisObj->insert(ObjRefPoint(parameter[0].to<const Vec3&>(rt), parameter[1])),thisEObj))
+	ES_MFUN(typeObject,PointOctree_EObj,"insert",2,2,(thisObj->insert(ObjRefPoint(parameter[0].to<Vec3>(rt), parameter[1])),thisEObj))
 
 	//! [ESMF] Array PointOctree.collectPoints()
 	ES_MFUNCTION(typeObject,const PointOctree_EObj,"collectPoints",0,0,{
@@ -96,7 +96,7 @@ void E_PointOctree::init(EScript::Namespace & lib) {
 	//! [ESMF] Array PointOctree.getClosestPoints(Vec3 center, int count)
 	ES_MFUNCTION(typeObject,const PointOctree_EObj,"getClosestPoints",2,2,{
 		pointQueue_t points;
-		thisObj->getClosestPoints(parameter[0].to<const Vec3&>(rt),parameter[1].toUInt(),points);
+		thisObj->getClosestPoints(parameter[0].to<Vec3>(rt),parameter[1].toUInt(),points);
 		return convertToEScriptArray(points);
 	})
 }

@@ -78,19 +78,19 @@ void init(EScript::Namespace * globals) {
 
 	//! [ESF] Vec3 getClosestPointOnLineToRay(Vec3 linePos, Vec3 lineDir, Vec3 rayPos, Vec3 rayDir)
 	ES_FUNCTION2(lib,"getClosestPointOnLineToRay",4,4,{
-		const Vec3 & linePos = parameter[0].to<const Vec3&>(rt);
-		const Vec3 & lineDir = parameter[1].to<const Vec3&>(rt);
-		const Vec3 & rayPos = parameter[2].to<const Vec3&>(rt);
-		const Vec3 & rayDir = parameter[3].to<const Vec3&>(rt);
+		const Vec3 & linePos = parameter[0].to<Vec3>(rt);
+		const Vec3 & lineDir = parameter[1].to<Vec3>(rt);
+		const Vec3 & rayPos = parameter[2].to<Vec3>(rt);
+		const Vec3 & rayDir = parameter[3].to<Vec3>(rt);
 		return EScript::create(std::move(getClosestPointOnLineToRay(linePos, lineDir, rayPos, rayDir)));
 	})
 
 	//! [ESF] Vec3|false rayPlaneIntersection(Vec3 planePos, Vec3 planeNormal, Vec3 rayPos, Vec3 rayDir)
 	ES_FUNCTION2(lib,"rayPlaneIntersection",4,4,{
-		const Vec3 & planePos = parameter[0].to<const Vec3&>(rt);
-		const Vec3 & planeNormal = parameter[1].to<const Vec3&>(rt);
-		const Vec3 & rayPos = parameter[2].to<const Vec3&>(rt);
-		const Vec3 & rayDir = parameter[3].to<const Vec3&>(rt);
+		const Vec3 & planePos = parameter[0].to<Vec3>(rt);
+		const Vec3 & planeNormal = parameter[1].to<Vec3>(rt);
+		const Vec3 & rayPos = parameter[2].to<Vec3>(rt);
+		const Vec3 & rayDir = parameter[3].to<Vec3>(rt);
 		Vec3 intersection;
 		bool result = rayPlaneIntersection(planePos, planeNormal, rayPos, rayDir, intersection);
 		if (result) {

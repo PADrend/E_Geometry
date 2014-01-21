@@ -37,8 +37,8 @@ void E_Line3::init(EScript::Namespace & lib) {
 			return new E_Line3(parameter[0].to<const Line3&>(rt));
 		}else if(parameter.count()==2){
 			return new E_Line3(
-					parameter[0].to<const Vec3&>(rt),
-					parameter[1].to<const Vec3&>(rt));
+					parameter[0].to<Vec3>(rt),
+					parameter[1].to<Vec3>(rt));
 		}else{
 			return new E_Line3;
 		}
@@ -46,7 +46,7 @@ void E_Line3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] Number line3.distance(Vec3)
 	ES_MFUN(typeObject,const Line3,"distance",1,1,
-				thisObj->distance(parameter[0].to<const Vec3&>(rt)))
+				thisObj->distance(parameter[0].to<Vec3>(rt)))
 
 	//!	[ESMF] Vec3 line3.getDirection()
 	ES_MFUN(typeObject,const Line3,"getDirection",0,0,
@@ -54,7 +54,7 @@ void E_Line3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] Vec3 line3.getClosestPoint(Vec3)
 	ES_MFUN(typeObject,const Line3,"getClosestPoint",1,1,
-				std::move(thisObj->getClosestPoint(parameter[0].to<const Vec3&>(rt))))
+				std::move(thisObj->getClosestPoint(parameter[0].to<Vec3>(rt))))
 
 	//!	[ESMF] Array Line3.getClosestValues(Line3)
 	ES_MFUNCTION(typeObject, const Line3, "getClosestValues", 1, 1, {
@@ -83,11 +83,11 @@ void E_Line3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] self line3.setDirection(Vec3)
 	ES_MFUN(typeObject,Line3,"setDirection",1,1,
-				(thisObj->setDirection(parameter[0].to<const Vec3&>(rt)),thisEObj))
+				(thisObj->setDirection(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//!	[ESMF] self line3.setOrigin(Vec3)
 	ES_MFUN(typeObject,Line3,"setOrigin",1,1,
-				(thisObj->setOrigin(parameter[0].to<const Vec3&>(rt)),thisEObj))
+				(thisObj->setOrigin(parameter[0].to<Vec3>(rt)),thisEObj))
 }
 
 std::string E_Line3::toString() const {

@@ -56,7 +56,7 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 	//! [ESMF] self E_Quaternion.makeRotate(deg, (Vec3 axis | x,y,z) )
 	ES_MFUN(typeObject,Quaternion,"makeRotate",2,4,(parameter.count() < 4 ?
 			thisObj->makeRotate_deg(
-				parameter[0].to<float>(rt),parameter[1].to<const Vec3&>(rt)) :
+				parameter[0].to<float>(rt),parameter[1].to<Vec3>(rt)) :
 			thisObj->makeRotate_deg(
 				parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt),parameter[3].to<float>(rt)),thisEObj))
 

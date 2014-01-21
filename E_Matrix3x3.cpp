@@ -62,7 +62,7 @@ void E_Matrix3x3::init(EScript::Namespace & lib) {
 
 	//! [ESF] Matrix3x3 Matrix3x3.createRotation(Number deg, Vec3 axis)
 	ES_FUN(typeObject, "createRotation", 0, 0, 
-				 std::move((Matrix3x3::createRotation(Angle::deg(parameter[0].to<float>(rt)),parameter[1].to<const Vec3&>(rt)))))
+				 std::move((Matrix3x3::createRotation(Angle::deg(parameter[0].to<float>(rt)),parameter[1].to<Vec3>(rt)))))
 
 	//! [ESMF] Number Matrix3x3.det()
 	ES_MFUN(typeObject,const Matrix3x3, "det", 0, 0, thisObj->det())
@@ -82,12 +82,12 @@ void E_Matrix3x3::init(EScript::Namespace & lib) {
 	//! [ESMF] self Matrix3x3.rotateLocal_deg(Number degrees, Vec3 axis)
 	ES_MFUN(typeObject,Matrix3x3, "rotateLocal_deg", 2, 2,
 				 (*thisObj = *thisObj * Matrix3x3::createRotation(Angle::deg(parameter[0].to<float>(rt)),
-																			parameter[1].to<const Vec3&>(rt)),thisEObj))
+																			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self Matrix3x3.rotateLocal_rad(Number radians, Vec3 axis)
 	ES_MFUN(typeObject,Matrix3x3, "rotateLocal_rad", 2, 2,
 				 (*thisObj = *thisObj * Matrix3x3::createRotation(Angle::rad(parameter[0].to<float>(rt)), 
-																			parameter[1].to<const Vec3&>(rt)),thisEObj))
+																			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	/*!	[ESF] self Matrix3x3.set( [Matrix3x3 | row,column,value | v0,...,v8])	*/
 	ES_MFUNCTION(typeObject,Matrix3x3,"set",1,9,{
@@ -112,8 +112,8 @@ void E_Matrix3x3::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self Matrix3x3.setRotation(Vec3 dir, Vec3 up)
 	ES_MFUN(typeObject,Matrix3x3, "setRotation", 2, 2, (thisObj->setRotation(
-			parameter[0].to<const Vec3&>(rt),
-			parameter[1].to<const Vec3&>(rt)),thisEObj))
+			parameter[0].to<Vec3>(rt),
+			parameter[1].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] Array Matrix3x3.toArray()
 	ES_MFUNCTION(typeObject,const Matrix3x3,"toArray",0,0,{

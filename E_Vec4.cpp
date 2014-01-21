@@ -56,7 +56,7 @@ void E_Vec4::init(EScript::Namespace & lib) {
 		}else if(parameter.count()==4){
 			return new E_Vec4(Vec4(parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt),parameter[3].to<double>(rt)));
 		}else if(parameter.count()==2){
-			return new E_Vec4(Vec4(parameter[0].to<const Vec3&>(rt), parameter[1].to<double>(rt) ));
+			return new E_Vec4(Vec4(parameter[0].to<Vec3>(rt), parameter[1].to<double>(rt) ));
 		}else {
 			if(parameter.count()!=0){
 				rt.warn("new Vec4: Wrong parameter count!");
@@ -132,7 +132,7 @@ void E_Vec4::init(EScript::Namespace & lib) {
 				thisObj->setValue(a->at(0).toFloat(), a->at(1).toFloat(), a->at(2).toFloat(), a->at(3).toFloat());
 			}
 		}else if(parameter.count()==2){
-			*thisObj = Vec4(parameter[0].to<const Vec3&>(rt), parameter[1].to<double>(rt) );
+			*thisObj = Vec4(parameter[0].to<Vec3>(rt), parameter[1].to<double>(rt) );
 		}else {
 			assertParamCount(rt,parameter,4,4);
 			thisObj->setValue(parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt),parameter[3].to<float>(rt));

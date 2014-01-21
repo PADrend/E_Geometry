@@ -35,10 +35,10 @@ void E_Tetrahedron::init(EScript::Namespace & lib) {
 	//!	[ESMF] line new Tetrahedron(Vec3 a, Vec3 b, Vec3 c, Vec3 d)
 	ES_CONSTRUCTOR(typeObject, 4, 4, {
 		return new E_Tetrahedron(Tetrahedron<float>(
-								parameter[0].to<const Vec3&>(rt),
-								parameter[1].to<const Vec3&>(rt),
-								parameter[2].to<const Vec3&>(rt),
-								parameter[3].to<const Vec3&>(rt)));
+								parameter[0].to<Vec3>(rt),
+								parameter[1].to<Vec3>(rt),
+								parameter[2].to<Vec3>(rt),
+								parameter[3].to<Vec3>(rt)));
 	})
 
 	//! [ESF] Number Triangle.calcVolume()
@@ -46,11 +46,11 @@ void E_Tetrahedron::init(EScript::Namespace & lib) {
 	
 	//! [ESF] Bool Tetrahedron.containsPoint(Vec3 p, Number epsilon)
 	ES_MFUN(typeObject,const Tetrahedron<float>, "containsPoint", 2, 2,
-			thisObj->containsPoint(parameter[0].to<const Vec3&>(rt), parameter[1].to<float>(rt)))
+			thisObj->containsPoint(parameter[0].to<Vec3>(rt), parameter[1].to<float>(rt)))
 
 	//! [ESF] Number Tetrahedron.distanceSquared(Vec3 p)
 	ES_MFUN(typeObject,const Tetrahedron<float>, "distanceSquared", 1, 1,
-			thisObj->distanceSquared(parameter[0].to<const Vec3&>(rt)))
+			thisObj->distanceSquared(parameter[0].to<Vec3>(rt)))
 
 	//! [ESF] Triangle Tetrahedron.getFaceA()
 	ES_MFUN(typeObject,const Tetrahedron<float>, "getFaceA", 0, 0, thisObj->getFaceA())

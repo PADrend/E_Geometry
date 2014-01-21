@@ -34,9 +34,9 @@ void E_Triangle::init(EScript::Namespace & lib) {
 	//!	[ESMF] line new Triangle(Vec3 a, Vec3 b, Vec3 c)
 	ES_CONSTRUCTOR(typeObject, 3, 3, {
 		return new E_Triangle(Triangle<Vec3f>(
-								parameter[0].to<const Vec3&>(rt),
-								parameter[1].to<const Vec3&>(rt),
-								parameter[2].to<const Vec3&>(rt)));
+								parameter[0].to<Vec3>(rt),
+								parameter[1].to<Vec3>(rt),
+								parameter[2].to<Vec3>(rt)));
 	})
 
 	//! [ESF] Number Triangle.calcArea()
@@ -47,11 +47,11 @@ void E_Triangle::init(EScript::Namespace & lib) {
 
 	//! [ESF] Vec3 Triangle.calcBarycentricCoordinates(Vec3 p)
 	ES_MFUN(typeObject,const Triangle<Vec3f>, "calcBarycentricCoordinates", 1, 1,
-			std::move(thisObj->calcBarycentricCoordinates(parameter[0].to<const Vec3&>(rt))))
+			std::move(thisObj->calcBarycentricCoordinates(parameter[0].to<Vec3>(rt))))
 
 	//! [ESF] Array Triangle.closestPoint(Vec3 p)
 	ES_MFUNCTION(typeObject,const Triangle<Vec3f>, "closestPoint", 1, 1, {
-			const Vec3f & p = parameter[0].to<const Vec3&>(rt);
+			const Vec3f & p = parameter[0].to<Vec3>(rt);
 			Vec3f barycentric;
 			Vec3f result = thisObj->closestPoint(p, barycentric);
 
@@ -63,7 +63,7 @@ void E_Triangle::init(EScript::Namespace & lib) {
 
 	//! [ESF] Number Triangle.distanceSquared(Vec3 p)
 	ES_MFUN(typeObject,const Triangle<Vec3f>, "distanceSquared", 1, 1,
-			thisObj->distanceSquared(parameter[0].to<const Vec3&>(rt)))
+			thisObj->distanceSquared(parameter[0].to<Vec3>(rt)))
 
 }
 

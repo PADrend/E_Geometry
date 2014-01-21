@@ -36,8 +36,8 @@ void E_Segment3::init(EScript::Namespace & lib) {
 			return new E_Segment3(parameter[0].to<const Segment3&>(rt));
 		}else if(parameter.count()==2){
 			return new E_Segment3(Segment3(
-					parameter[0].to<const Vec3&>(rt),
-					parameter[1].to<const Vec3&>(rt)));
+					parameter[0].to<Vec3>(rt),
+					parameter[1].to<Vec3>(rt)));
 		}else{
 			return new E_Segment3;
 		}
@@ -45,7 +45,7 @@ void E_Segment3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] Number line3.distance(Vec3)
 	ES_MFUN(typeObject,const Segment3,"distance",1,1,
-				thisObj->distance(parameter[0].to<const Vec3&>(rt)))
+				thisObj->distance(parameter[0].to<Vec3>(rt)))
 
 	//!	[ESMF] Vec3 line3.getDirection()
 	ES_MFUN(typeObject,const Segment3,"getDirection",0,0,
@@ -53,7 +53,7 @@ void E_Segment3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] Vec3 line3.getClosestPoint(Vec3)
 	ES_MFUN(typeObject,const Segment3,"getClosestPoint",1,1,
-				std::move(thisObj->getClosestPoint(parameter[0].to<const Vec3&>(rt))))
+				std::move(thisObj->getClosestPoint(parameter[0].to<Vec3>(rt))))
 
 	//!	[ESMF] Vec3 line3.getFirstPoint()
 	ES_MFUN(typeObject,const Segment3,"getFirstPoint",0,0,
@@ -77,11 +77,11 @@ void E_Segment3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] self line3.setFirstPoint(Vec3)
 	ES_MFUN(typeObject,Segment3,"setFirstPoint",1,1,
-				(thisObj->setFirstPoint(parameter[0].to<const Vec3&>(rt)),thisEObj))
+				(thisObj->setFirstPoint(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//!	[ESMF] self line3.setSecondPoint(Vec3)
 	ES_MFUN(typeObject,Segment3,"setSecondPoint",1,1,
-				(thisObj->setSecondPoint(parameter[0].to<const Vec3&>(rt)),thisEObj))
+				(thisObj->setSecondPoint(parameter[0].to<Vec3>(rt)),thisEObj))
 }
 
 std::string E_Segment3::toString() const {

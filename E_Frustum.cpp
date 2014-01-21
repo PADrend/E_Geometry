@@ -78,7 +78,7 @@ void E_Frustum::init(EScript::Namespace & lib) {
 
 	//! [ESMF] bool Frustum.pointInFrustum(Vec3)
 	ES_MFUN(typeObject,const Frustum,"pointInFrustum",1,1,
-			thisObj->pointInFrustum( parameter[0].to<const Vec3&>(rt) ))
+			thisObj->pointInFrustum( parameter[0].to<Vec3>(rt) ))
 
 	// modification
 
@@ -108,9 +108,9 @@ void E_Frustum::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self Frustum.setPosition(Vec3 pos, Vec3 dir, Vec3 up)
 	ES_MFUN(typeObject,Frustum,"setPosition",3,3,
-			(thisObj->setPosition( 	parameter[0].to<const Vec3&>(rt),
-									parameter[1].to<const Vec3&>(rt),
-									parameter[2].to<const Vec3&>(rt)),thisEObj))
+			(thisObj->setPosition( 	parameter[0].to<Vec3>(rt),
+									parameter[1].to<Vec3>(rt),
+									parameter[2].to<Vec3>(rt)),thisEObj))
 
 }
 

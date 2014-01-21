@@ -82,9 +82,9 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self Matrix4x4.lookAt(E_Vec3 pos,E_Vec3 target,E_Vec3 up)
 	ES_MFUN(typeObject,Matrix4x4,"lookAt",3,3,( thisObj->lookAt(
-		 parameter[0].to<const Vec3&>(rt),
-		 parameter[1].to<const Vec3&>(rt),
-		 parameter[2].to<const Vec3&>(rt)),thisEObj))
+		 parameter[0].to<Vec3>(rt),
+		 parameter[1].to<Vec3>(rt),
+		 parameter[2].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self Matrix4x4.rotate(deg,x,y,z)
 	ES_MFUN(typeObject,Matrix4x4,"rotate",4,4,(thisObj->
@@ -121,7 +121,7 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 			return EScript::create(thisObj->transformDirection(parameter[0].to<double>(rt),
 										parameter[1].to<double>(rt),parameter[2].to<double>(rt)));
 		}
-		return EScript::create(thisObj->transformDirection(parameter[0].to<const Vec3&>(rt)));
+		return EScript::create(thisObj->transformDirection(parameter[0].to<Vec3>(rt)));
 	})
 	
 	//! [ESMF] Vec3 Matrix4x4.transformPosition(E_Vec3|x,y,z)
@@ -130,7 +130,7 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 			return EScript::create(thisObj->transformPosition(parameter[0].to<double>(rt),
 										parameter[1].to<double>(rt),parameter[2].to<double>(rt)));
 		}
-		return EScript::create(thisObj->transformPosition(parameter[0].to<const Vec3&>(rt)));
+		return EScript::create(thisObj->transformPosition(parameter[0].to<Vec3>(rt)));
 	})
 
 	//! [ESMF] Array Matrix4x4.toArray()
@@ -154,7 +154,7 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 			parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt));
 		}
 		else{
-			thisObj->translate(parameter[0].to<const Vec3&>(rt));
+			thisObj->translate(parameter[0].to<Vec3>(rt));
 		}
 		return thisEObj;
 	})

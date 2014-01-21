@@ -36,7 +36,7 @@ void E_Sphere::init(EScript::Namespace & lib) {
 			return new E_Sphere(parameter[0].to<const Sphere_f&>(rt));
 		} else if(parameter.count() == 2) {
 			return new E_Sphere(Sphere_f(
-					parameter[0].to<const Vec3&>(rt),
+					parameter[0].to<Vec3>(rt),
 					parameter[1].to<float>(rt)));
 		} else {
 			return new E_Sphere;
@@ -55,11 +55,11 @@ void E_Sphere::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Number Sphere.distance(Vec3)
 	ES_MFUN(typeObject,const Sphere_f, "distance", 1, 1,
-				thisObj->distance(parameter[0].to<const Vec3&>(rt)))
+				thisObj->distance(parameter[0].to<Vec3>(rt)))
 
 	//! [ESMF] Bool Sphere.isOutside(Vec3)
 	ES_MFUN(typeObject,const Sphere_f, "isOutside", 1, 1,
-				thisObj->isOutside(parameter[0].to<const Vec3&>(rt)))
+				thisObj->isOutside(parameter[0].to<Vec3>(rt)))
 
 	//! [ESMF] Vec3 Sphere.calcCartesianCoordinate(Number, Number)
 	ES_MFUN(typeObject,const Sphere_f, "calcCartesianCoordinate", 2, 2,
@@ -73,7 +73,7 @@ void E_Sphere::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self Sphere.setCenter(Vec3)
 	ES_MFUN(typeObject,Sphere_f, "setCenter", 1, 1,
-				(thisObj->setCenter(parameter[0].to<const Vec3&>(rt)),thisEObj))
+				(thisObj->setCenter(parameter[0].to<Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self Sphere.setRadius(Vec3)
 	ES_MFUN(typeObject,Sphere_f, "setRadius", 1, 1,
