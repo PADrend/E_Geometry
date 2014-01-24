@@ -92,7 +92,7 @@ void E_Line3::init(EScript::Namespace & lib) {
 
 std::string E_Line3::toString() const {
 	std::ostringstream stream;
-	stream << getClassName() << '(' << (**this).getOrigin() << '+' << (**this).getDirection() << " * t)";
+	stream << getClassName() << "([" << (**this).getOrigin() << "] + [" << (**this).getDirection() << "] * t)";
 	return stream.str();
 }
 
