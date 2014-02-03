@@ -17,6 +17,7 @@
 #include <Geometry/SRT.h>
 #include <Geometry/Vec3.h>
 #include <sstream>
+#include <array>
 
 namespace E_Geometry {
 
@@ -32,13 +33,22 @@ void E_SRT::init(EScript::Namespace & lib) {
 	declareConstant(&lib, getClassName(), typeObject);
 
 	using namespace Geometry;
+	typedef std::array<float,8> arr8_t; // no template inside macro...
 	
 	//! [ESF] SRT new Geometry.SRT( [SRT] | pos, dir, up[, scale] | srt1, srt2, blend )
 	ES_CONSTRUCTOR(typeObject, 0, 4, {
 		if(parameter.count() == 0) {
 			return new E_SRT;
 		} else if(parameter.count() == 1) {
-			return EScript::create(parameter[0].to<const SRT&>(rt));
+			if(parameter[0].toType<EScript::Array>()) {
+				arr8_t arr;
+				size_t i=0;
+				for(const EScript::ObjPtr obj : **parameter[0].toType<EScript::Array>() )
+					arr[i++] = obj.toFloat();
+				return EScript::create( SRT(arr) );
+			}else{
+				return EScript::create(parameter[0].to<const SRT&>(rt));
+			}
 		} else if(parameter[0].toType<E_SRT>()) {
 			assertParamCount(rt, parameter, 3, 3);
 			return new E_SRT(	parameter[0].to<const SRT&>(rt),
@@ -120,7 +130,15 @@ void E_SRT::init(EScript::Namespace & lib) {
 		if(parameter.count() == 0) {
 			*thisObj = SRT();
 		} else if(parameter.count() == 1) {
-			*thisObj = parameter[0].to<const SRT&>(rt);
+			if(parameter[0].toType<EScript::Array>()) {
+				arr8_t arr;
+				size_t i=0;
+				for(const EScript::ObjPtr obj : **parameter[0].toType<EScript::Array>() )
+					arr[i++] = obj.toFloat();
+				*thisObj = SRT(arr);
+			}else{
+				*thisObj = parameter[0].to<const SRT&>(rt);
+			}
 		} else if(parameter[0].toType<E_SRT>()) {
 			assertParamCount(rt, parameter, 3, 3);
 			*thisObj = SRT(	parameter[0].to<const SRT&>(rt),
@@ -134,6 +152,15 @@ void E_SRT::init(EScript::Namespace & lib) {
 		}
 		return thisEObj;
 	})
+	
+	//! [ESMF] Array Vec3.toArray()
+	ES_MFUNCTION(typeObject,const SRT,"toArray",0,0,{
+		EScript::Array * a = EScript::Array::create();
+		for(const auto& n : thisObj->toArray())
+			a->pushBack(EScript::create(n));
+		return a;
+	})
+	
 
 	//! [ESMF] self SRT.translate(Vec3)
 	ES_MFUN(typeObject,SRT, "translate", 1, 1, (thisObj->translate(parameter[0].to<Vec3>(rt)),thisEObj))
