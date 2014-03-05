@@ -11,6 +11,7 @@
 #include "E_Frustum.h"
 #include "E_Box.h"
 #include "E_Matrix4x4.h"
+#include "E_Plane.h"
 #include "E_Vec3.h"
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
@@ -68,6 +69,9 @@ void E_Frustum::init(EScript::Namespace & lib) {
 
 	//! [ESMF] float Frustum.getFar()
 	ES_MFUN(typeObject,const Frustum,"getFar",0,0, thisObj->getFar())
+
+	//! [ESMF] Plane Frustum.getPlane( int PlaneId )
+	ES_MFUN(typeObject,const Frustum,"getPlane",1,1,std::move(thisObj->getPlane(static_cast<Geometry::side_t>(parameter[0].toUInt()))))
 
 	//! [ESMF] Matrix4x4 Frustum.getProjectionMatrix()
 	ES_MFUN(typeObject,const Frustum,"getProjectionMatrix",0,0,std::move(thisObj->getProjectionMatrix()))
