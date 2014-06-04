@@ -95,9 +95,24 @@ void init(EScript::Namespace * globals) {
 		if (result) {
 			return EScript::create(std::move(intersection));
 		} else {
-			return EScript::Bool::create(false);
+			return EScript::create(false);
 		}
 	})
+	
+	//! [ESF] [Number,Number]|false lineSphereIntersections(Line3 line, Sphere sphere)
+	ES_FUNCTION(lib,"lineSphereIntersections",2,2,{
+		const Line3 line = parameter[0].to<Line3>(rt);
+		auto result = lineSphereIntersections(line,parameter[1].to<Sphere_f>(rt));
+		if(std::get<0>(result)) {
+			EScript::Array* arr = EScript::Array::create();
+			arr->pushBack( EScript::create( std::get<1>(result) ) );
+			arr->pushBack( EScript::create( std::get<2>(result) ) );
+			return arr;
+		} else {
+			return EScript::create(false);
+		}
+	})
+	
 
 	//! [ESF] Frustum calcEnclosingOrthoFrustum(Box, Matrix4x4)
 	ES_FUNCTION(lib, "calcEnclosingOrthoFrustum", 2, 2, {
