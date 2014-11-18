@@ -91,16 +91,29 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 			rotate_deg(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
 					   parameter[2].to<double>(rt),parameter[3].to<double>(rt)),thisEObj))
 
-	//! [ESMF] self Matrix4x4.rotate_deg(deg,x,y,z)
-	ES_MFUN(typeObject,Matrix4x4,"rotate_deg",4,4,(thisObj->
-			rotate_deg(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
-					   parameter[2].to<double>(rt),parameter[3].to<double>(rt)),thisEObj))
+	//! [ESMF] self Matrix4x4.rotate_deg(deg,  (x,y,z)| Vec3 )
+	ES_MFUNCTION(typeObject,Matrix4x4,"rotate_deg",2,4,{
+		if(parameter.count()==2){
+			thisObj->rotate_deg(parameter[0].to<double>(rt),parameter[1].to<Geometry::Vec3>(rt));
+		}else{
+			assertParamCount(rt,parameter.count(),4,4);
+			thisObj->rotate_deg(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
+					   parameter[2].to<double>(rt),parameter[3].to<double>(rt));
+		}
+		return thisEObj;
+	})
 
-	//! [ESMF] self Matrix4x4.rotate_rad(angle,x,y,z)
-	ES_MFUN(typeObject,Matrix4x4,"rotate_rad",4,4,(thisObj->
-			rotate_rad(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
-					   parameter[2].to<double>(rt),parameter[3].to<double>(rt)),thisEObj))
-
+	//! [ESMF] self Matrix4x4.rotate_rad(deg,  (x,y,z)| Vec3 )
+	ES_MFUNCTION(typeObject,Matrix4x4,"rotate_rad",2,4,{
+		if(parameter.count()==2){
+			thisObj->rotate_rad(parameter[0].to<double>(rt),parameter[1].to<Geometry::Vec3>(rt));
+		}else{
+			assertParamCount(rt,parameter.count(),4,4);
+			thisObj->rotate_rad(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
+					   parameter[2].to<double>(rt),parameter[3].to<double>(rt));
+		}
+		return thisEObj;
+	})
 
 	//! [ESMF] Matrix4x4 Matrix4x4.scale(x,y,z)
 	ES_MFUNCTION(typeObject,Matrix4x4,"scale",3,3,{
