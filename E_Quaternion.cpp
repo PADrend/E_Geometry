@@ -31,13 +31,13 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 
 	using namespace Geometry;
 	
-	//! [ESMF] Quaternion new Quaternion([ x,y,z,w | Quaternion | Array ])
+	//! [ESMF] Quaternion new Quaternion([ x,y,z,w | Quaternion | Mat3x3|  Array(x,y,z,w) ])
 	ES_CONSTRUCTOR(typeObject,0,4,{
 		if(parameter.count()==1){
-
-			E_Quaternion * v2=parameter[0].toType<E_Quaternion>();
-			if(v2){
+			if(E_Quaternion * v2=parameter[0].toType<E_Quaternion>()){
 				return new E_Quaternion( **v2 );
+			}else if(E_Matrix3x3 * emat=parameter[0].toType<E_Matrix3x3>()){
+				return new E_Quaternion( Quaternion::matrixToQuaternion(**emat) );
 			}else {
 				const EScript::Array * a = parameter[0].to<EScript::Array*>(rt);
 				return new E_Quaternion(a->at(0).toFloat(), a->at(1).toFloat(), a->at(2).toFloat(), a->at(3).toFloat());
@@ -79,10 +79,20 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Quaternion,"conjugate",0,0,new E_Quaternion(thisObj->conjugate()))
 
 	//! [ESMF] Number E_Quaternion.dot(Quaternion)
-	ES_MFUN(typeObject,Quaternion,"dot",1,1,thisObj->dot(parameter[0].to<const Quaternion&>(rt)))
+	ES_MFUN(typeObject,const Quaternion,"dot",1,1,thisObj->dot(parameter[0].to<const Quaternion&>(rt)))
+
+	//! [ESMF] Array E_Quaternion.toArray()
+	ES_MFUNCTION(typeObject,const Quaternion,"toArray",0,0,{
+		EScript::Array* arr = EScript::Array::create();
+		arr->pushBack( EScript::create(thisObj->x()) );
+		arr->pushBack( EScript::create(thisObj->y()) );
+		arr->pushBack( EScript::create(thisObj->z()) );
+		arr->pushBack( EScript::create(thisObj->w()) );
+		return arr;
+	})
 
 	//! [ESMF] E_Matrix3x3 E_Quaternion.toMatrix()
-	ES_MFUN(typeObject,Quaternion,"toMatrix",0,0,std::move(thisObj->toMatrix()))
+	ES_MFUN(typeObject,const Quaternion,"toMatrix",0,0,std::move(thisObj->toMatrix()))
 
 	//! [ESF] (static) E_Quaternion lerp(Quaternion, Quaternion, float)
 	ES_FUN(typeObject,"lerp",3,3,Quaternion::lerp(parameter[0].to<const Quaternion&>(rt),

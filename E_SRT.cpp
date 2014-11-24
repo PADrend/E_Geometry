@@ -35,7 +35,7 @@ void E_SRT::init(EScript::Namespace & lib) {
 	using namespace Geometry;
 	typedef std::array<float,8> arr8_t; // no template inside macro...
 	
-	//! [ESF] SRT new Geometry.SRT( [SRT] | pos, dir, up[, scale] | srt1, srt2, blend )
+	//! [ESF] SRT new Geometry.SRT( [SRT] | pos, dir, up[, scale] | srt1, srt2, blend | Array[8] )
 	ES_CONSTRUCTOR(typeObject, 0, 4, {
 		if(parameter.count() == 0) {
 			return new E_SRT;
