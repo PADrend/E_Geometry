@@ -80,6 +80,9 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	//! [ESMF] Matrix4x4 Matrix4x4.inverse()
 	ES_MFUN(typeObject,Matrix4x4,"inverse",0,0,std::move(thisObj->inverse()))
 
+	 //! [ESMF] Matrix4x4 Matrix4x4.getTransposed()
+	ES_MFUN(typeObject,Matrix4x4,"getTransposed",0,0,std::move(thisObj->getTransposed()))
+
 	//! [ESMF] self Matrix4x4.lookAt(E_Vec3 pos,E_Vec3 target,E_Vec3 up)
 	ES_MFUN(typeObject,Matrix4x4,"lookAt",3,3,( thisObj->lookAt(
 		 parameter[0].to<Vec3>(rt),
