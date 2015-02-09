@@ -30,13 +30,33 @@ void E_Matrix3x3::init(EScript::Namespace & lib) {
 
 	using namespace Geometry;
 	
-	//!	[ESMF] new Geometry.Matrix3x3([Matrix3x3])
-	ES_CTOR(typeObject,0,3, parameter.count() == 0 ?
-		new E_Matrix3x3 :
-			(parameter.count() == 1 ?
-			new E_Matrix3x3(parameter[0].to<const Matrix3x3&>(rt)) :
+	//!	[ESMF] new Geometry.Matrix3x3([Matrix3x3 | Array | (Matrix3x3, Matrix3x3, Number)])
+	ES_CONSTRUCTOR(typeObject,0,3, {
+		if(parameter.count() == 1) {
+			E_Matrix3x3 * em=parameter[0].toType<E_Matrix3x3>();
+			if(em)
+				return new E_Matrix3x3(**em);
+
+			EScript::Array * a=parameter[0].toType<EScript::Array>();
+			if(!a){
+				rt.setException("Matrix3x3: Wrong argument for constructor.");
+				return nullptr;
+			}
+			float f[9];
+			for(unsigned int i=0;i<9;i++){
+				Object * num=a->get(i);
+				if(num){
+					f[i]=static_cast<float>(num->toDouble());
+				}else{
+					f[i]=0;
+				}
+			}
+			return new E_Matrix3x3(f);
+		} else
+			return parameter.count() == 0 ? new E_Matrix3x3 :
 			new E_Matrix3x3(parameter[0].to<const Matrix3x3&>(rt),
-			parameter[1].to<const Matrix3x3&>(rt), parameter[2].to<float>(rt))))
+			parameter[1].to<const Matrix3x3&>(rt), parameter[2].to<float>(rt));
+	})
 
 
 	//! [ESMF] Matrix3x3 Matrix3x3 + Matrix3x3
