@@ -32,6 +32,7 @@
 #include <Geometry/Definitions.h>
 #include <Geometry/Vec3.h>
 #include <Geometry/Tools.h>
+#include <Geometry/LineTriangleIntersection.h>
 
 namespace E_Geometry {
 
@@ -113,6 +114,16 @@ void init(EScript::Namespace * globals) {
 		}
 	})
 	
+	//! [ESF] [Number,Number]|false lineSphereIntersections(Line3 line, Triangle triangle)
+	ES_FUNCTION(lib,"lineTriangleIntersection",2,2,{
+		const Line3 line = parameter[0].to<Line3>(rt);
+		float tLine; float uTri; float vTri;
+		if(Intersection::getLineTriangleIntersection(line,parameter[1].to<Triangle_f>(rt), tLine, uTri, vTri)) {
+			return EScript::create(line.getPoint(tLine));
+		} else {
+			return EScript::create(false);
+		}
+	})
 
 	//! [ESF] Frustum calcEnclosingOrthoFrustum(Box, Matrix4x4)
 	ES_FUNCTION(lib, "calcEnclosingOrthoFrustum", 2, 2, {
