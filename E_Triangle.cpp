@@ -65,6 +65,20 @@ void E_Triangle::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,const Triangle<Vec3f>, "distanceSquared", 1, 1,
 			thisObj->distanceSquared(parameter[0].to<Vec3>(rt)))
 
+
+	//! [ESF] Vec3 Triangle.getVertexA()
+	ES_MFUN(typeObject,const Triangle<Vec3f>, "getVertexA", 0, 0,std::move(thisObj->getVertexA()))
+	//! [ESF] Vec3 Triangle.getVertexB()
+	ES_MFUN(typeObject,const Triangle<Vec3f>, "getVertexB", 0, 0,std::move(thisObj->getVertexB()))
+	//! [ESF] Vec3 Triangle.getVertexC()
+	ES_MFUN(typeObject,const Triangle<Vec3f>, "getVertexC", 0, 0,std::move(thisObj->getVertexC()))
+
+	//! [ESF] Vec3 Triangle.setVertexA()
+	ES_MFUN(typeObject,Triangle<Vec3f>, "setVertexA", 1, 1,(thisObj->setVertexA(parameter[0].to<Vec3>(rt)), thisEObj))
+	//! [ESF] Vec3 Triangle.setVertexB()
+	ES_MFUN(typeObject,Triangle<Vec3f>, "setVertexB", 1, 1,(thisObj->setVertexB(parameter[0].to<Vec3>(rt)), thisEObj))
+	//! [ESF] Vec3 Triangle.setVertexC()
+	ES_MFUN(typeObject,Triangle<Vec3f>, "setVertexC", 1, 1,(thisObj->setVertexC(parameter[0].to<Vec3>(rt)), thisEObj))
 }
 
 std::string E_Triangle::toString() const {
