@@ -33,6 +33,7 @@
 #include <Geometry/Vec3.h>
 #include <Geometry/Tools.h>
 #include <Geometry/LineTriangleIntersection.h>
+#include <Geometry/TriangleTriangleIntersection.h>
 
 namespace E_Geometry {
 
@@ -122,6 +123,19 @@ void init(EScript::Namespace * globals) {
 			return EScript::create(line.getPoint(tLine));
 		} else {
 			return EScript::create(false);
+		}
+	})
+
+	/*! [ESF] Segment3|true|false triangleTriangleIntersection(Triangle triangle1, Triangle triangle2)
+	 * Returns true when the triangles are coplanar
+	 */
+	ES_FUNCTION(lib,"triangleTriangleIntersection",2,2,{
+		Segment3 segment;
+		int32_t result = Intersection::getTriangleTriangleIntersection(parameter[0].to<Triangle_f>(rt), parameter[1].to<Triangle_f>(rt), segment);
+		if(result>0) {
+			return EScript::create(segment);
+		} else {
+			return EScript::create(result>=0);
 		}
 	})
 
