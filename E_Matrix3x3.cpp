@@ -81,7 +81,7 @@ void E_Matrix3x3::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Matrix3x3, "at", 2, 2, thisObj->at(parameter[0].toInt(), parameter[1].toInt()))
 
 	//! [ESF] Matrix3x3 Matrix3x3.createRotation(Number deg, Vec3 axis)
-	ES_FUN(typeObject, "createRotation", 0, 0, 
+	ES_FUN(typeObject, "createRotation", 2, 2,
 				 std::move((Matrix3x3::createRotation(Angle::deg(parameter[0].to<float>(rt)),parameter[1].to<Vec3>(rt)))))
 
 	//! [ESMF] Number Matrix3x3.det()
