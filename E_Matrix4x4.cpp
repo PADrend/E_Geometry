@@ -161,7 +161,10 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Matrix4x4, "convertsSafelyToSRT", 0, 0, thisObj->convertsSafelyToSRT())
 
 	//! [ESMF] SRT Matrix4x4.toSRT()
-	ES_MFUN(typeObject,Matrix4x4,"toSRT",0,0,std::move(thisObj->_toSRT()))
+	ES_MFUN(typeObject,Matrix4x4,"toSRT",0,0,std::move(thisObj->toSRT()))
+
+	//! [ESMF] SRT Matrix4x4._toSRT()
+	ES_MFUN(typeObject,Matrix4x4,"_toSRT",0,0,std::move(thisObj->_toSRT()))
 
 	//! [ESMF] Matrix4x4 Matrix4x4.translate(E_Vec3|x,y,z)
 	ES_MFUNCTION(typeObject,Matrix4x4,"translate",1,3,{
