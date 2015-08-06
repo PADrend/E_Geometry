@@ -3,9 +3,9 @@
 	Copyright (C) 2007-2012 Benjamin Eikel <benjamin@eikel.org>
 	Copyright (C) 2007-2012 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2007-2012 Ralf Petring <ralf@petring.net>
-	
+
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
-	You should have received a copy of the MPL along with this library; see the 
+	You should have received a copy of the MPL along with this library; see the
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
 #include "ELibGeometry.h"
@@ -34,12 +34,13 @@
 #include <Geometry/Tools.h>
 #include <Geometry/LineTriangleIntersection.h>
 #include <Geometry/TriangleTriangleIntersection.h>
+#include <Geometry/BoundingSphere.h>
 
 namespace E_Geometry {
 
 void init(EScript::Namespace * globals) {
 	using namespace Geometry;
-	
+
 	EScript::Namespace * lib = new EScript::Namespace();
 	declareConstant(globals, "Geometry", lib);
 	E_Box::init(*lib);
@@ -100,7 +101,7 @@ void init(EScript::Namespace * globals) {
 			return EScript::create(false);
 		}
 	})
-	
+
 	//! [ESF] [Number,Number]|false lineSphereIntersections(Line3 line, Sphere sphere)
 	ES_FUNCTION(lib,"lineSphereIntersections",2,2,{
 		const Line3 line = parameter[0].to<Line3>(rt);
@@ -114,7 +115,7 @@ void init(EScript::Namespace * globals) {
 			return EScript::create(false);
 		}
 	})
-	
+
 	//! [ESF] [Number,Number]|false lineSphereIntersections(Line3 line, Triangle triangle)
 	ES_FUNCTION(lib,"lineTriangleIntersection",2,2,{
 		const Line3 line = parameter[0].to<Line3>(rt);
@@ -145,6 +146,18 @@ void init(EScript::Namespace * globals) {
 		const Matrix4x4f & modelView = parameter[1].to<const Matrix4x4&>(rt);
 		return new E_Frustum(calcEnclosingOrthoFrustum(box, modelView));
 	})
+
+
+	//! [ESF] Sphere computeMiniball(Array points)
+	ES_FUNCTION(lib, "computeMiniball", 1, 1, {
+		std::vector<Vec3> points;
+		EScript::Array * a = parameter[0].to<EScript::Array*>(rt);
+		for(auto val : *a)
+			points.push_back(val.to<const Vec3&>(rt));
+		return EScript::create(BoundingSphere::computeMiniball(points));
+	})
+
+
 }
 
 }
