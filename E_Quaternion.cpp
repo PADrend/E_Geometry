@@ -3,9 +3,9 @@
 	Copyright (C) 2007-2012 Benjamin Eikel <benjamin@eikel.org>
 	Copyright (C) 2007-2012 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2007-2012 Ralf Petring <ralf@petring.net>
-	
+
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
-	You should have received a copy of the MPL along with this library; see the 
+	You should have received a copy of the MPL along with this library; see the
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
 #include "E_Quaternion.h"
@@ -30,7 +30,7 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 	declareConstant(&lib,getClassName(),typeObject);
 
 	using namespace Geometry;
-	
+
 	//! [ESMF] Quaternion new Quaternion([ x,y,z,w | Quaternion | Mat3x3|  Array(x,y,z,w) ])
 	ES_CONSTRUCTOR(typeObject,0,4,{
 		if(parameter.count()==1){
@@ -60,7 +60,7 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 			thisObj->makeRotate_deg(
 				parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt),parameter[3].to<float>(rt)),thisEObj))
 
-	//!	[ESMF] E_Quaternion E_Quaternion.*(number)	
+	//!	[ESMF] E_Quaternion E_Quaternion.*(number)
 	ES_MFUN(typeObject,const Quaternion,"*",1,1,*thisObj * parameter[0].to<float>(rt))
 
 	//! [ESMF] E_Quaternion E_Quaternion./(number)
@@ -134,6 +134,12 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self E_Quaternion.setW(Number)
 	ES_MFUN(typeObject,Quaternion,"setW",1,1,(thisObj->w()=parameter[0].to<float>(rt),thisEObj))
+
+	//! [ESMF] E_Vec3 E_Quaternion.toEuler()
+	ES_MFUN(typeObject,const Quaternion,"toEuler",0,0,std::move(thisObj->toEuler()))
+	
+	//! [ESF] (static) E_Quaternion eulerToQuaternion(Vec3)
+	ES_FUN(typeObject,"eulerToQuaternion",1,1,new E_Quaternion(Quaternion::eulerToQuaternion(parameter[0].to<const Vec3&>(rt))))
 
 }
 
