@@ -45,6 +45,9 @@ void E_Triangle::init(EScript::Namespace & lib) {
 	//! [ESF] Vec3 Triangle.calcNormal()
 	ES_MFUN(typeObject,const Triangle<Vec3f>, "calcNormal", 0, 0,std::move(thisObj->calcNormal()))
 
+	//! [ESF] Vec3 Triangle.calcPoint(Number u, Number v)
+	ES_MFUN(typeObject,const Triangle<Vec3f>, "calcPoint", 2, 2,std::move(thisObj->calcPoint(parameter[0].toFloat(),parameter[1].toFloat())))
+
 	//! [ESF] Vec3 Triangle.calcBarycentricCoordinates(Vec3 p)
 	ES_MFUN(typeObject,const Triangle<Vec3f>, "calcBarycentricCoordinates", 1, 1,
 			std::move(thisObj->calcBarycentricCoordinates(parameter[0].to<Vec3>(rt))))
