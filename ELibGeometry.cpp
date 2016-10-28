@@ -31,10 +31,12 @@
 #include <EScript/StdObjects.h>
 #include <Geometry/Definitions.h>
 #include <Geometry/Vec3.h>
+#include <Geometry/Vec2.h>
 #include <Geometry/Tools.h>
 #include <Geometry/LineTriangleIntersection.h>
 #include <Geometry/TriangleTriangleIntersection.h>
 #include <Geometry/BoundingSphere.h>
+#include <Geometry/VecHelper.h>
 
 namespace E_Geometry {
 
@@ -156,8 +158,16 @@ void init(EScript::Namespace * globals) {
 			points.push_back(val.to<const Vec3&>(rt));
 		return EScript::create(BoundingSphere::computeMiniball(points));
 	})
-
-
+	
+	//! [ESF] [Vec3|Vec2] createOrthogonal([Vec3|Vec2] vector)
+	ES_FUNCTION(lib,"createOrthogonal",1,1,{
+		const Vec3 * vec3 = parameter[0].to<Vec3*>(rt);
+		if(vec3) {
+			return EScript::create(std::move(Helper::createOrthogonal(*vec3)));
+		}
+		const Vec2 & vec2 = parameter[0].to<Vec2>(rt);
+		return EScript::create(std::move(Helper::createOrthogonal(vec2)));
+	})
 }
 
 }
