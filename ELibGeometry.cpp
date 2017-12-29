@@ -64,21 +64,21 @@ void init(EScript::Namespace * globals) {
 	E_Vec3::init(*lib);
 	E_Vec4::init(*lib);
 
-	declareConstant(lib,"CORNER_xyz", CORNER_xyz);
-	declareConstant(lib,"CORNER_Xyz", CORNER_Xyz);
-	declareConstant(lib,"CORNER_xYz", CORNER_xYz);
-	declareConstant(lib,"CORNER_XYz", CORNER_XYz);
-	declareConstant(lib,"CORNER_xyZ", CORNER_xyZ);
-	declareConstant(lib,"CORNER_XyZ", CORNER_XyZ);
-	declareConstant(lib,"CORNER_xYZ", CORNER_xYZ);
-	declareConstant(lib,"CORNER_XYZ", CORNER_XYZ);
+	declareConstant(lib,"CORNER_xyz", static_cast<int>(corner_t::xyz));
+	declareConstant(lib,"CORNER_Xyz", static_cast<int>(corner_t::Xyz));
+	declareConstant(lib,"CORNER_xYz", static_cast<int>(corner_t::xYz));
+	declareConstant(lib,"CORNER_XYz", static_cast<int>(corner_t::XYz));
+	declareConstant(lib,"CORNER_xyZ", static_cast<int>(corner_t::xyZ));
+	declareConstant(lib,"CORNER_XyZ", static_cast<int>(corner_t::XyZ));
+	declareConstant(lib,"CORNER_xYZ", static_cast<int>(corner_t::xYZ));
+	declareConstant(lib,"CORNER_XYZ", static_cast<int>(corner_t::XYZ));
 
-	declareConstant(lib,"SIDE_X_NEG", SIDE_X_NEG);
-	declareConstant(lib,"SIDE_Y_NEG", SIDE_Y_NEG);
-	declareConstant(lib,"SIDE_Z_NEG", SIDE_Z_NEG);
-	declareConstant(lib,"SIDE_X_POS", SIDE_X_POS);
-	declareConstant(lib,"SIDE_Y_POS", SIDE_Y_POS);
-	declareConstant(lib,"SIDE_Z_POS", SIDE_Z_POS);
+	declareConstant(lib,"SIDE_X_NEG", static_cast<int>(side_t::X_NEG));
+	declareConstant(lib,"SIDE_Y_NEG", static_cast<int>(side_t::Y_NEG));
+	declareConstant(lib,"SIDE_Z_NEG", static_cast<int>(side_t::Z_NEG));
+	declareConstant(lib,"SIDE_X_POS", static_cast<int>(side_t::X_POS));
+	declareConstant(lib,"SIDE_Y_POS", static_cast<int>(side_t::Y_POS));
+	declareConstant(lib,"SIDE_Z_POS", static_cast<int>(side_t::Z_POS));
 
 	//! [ESF] Vec3 getClosestPointOnLineToRay(Vec3 linePos, Vec3 lineDir, Vec3 rayPos, Vec3 rayDir)
 	ES_FUNCTION(lib,"getClosestPointOnLineToRay",4,4,{
