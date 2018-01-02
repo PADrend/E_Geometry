@@ -32,9 +32,9 @@ void E_Frustum::init(EScript::Namespace & lib) {
 
 	using namespace Geometry;
 	
-	declareConstant(typeObject,"INSIDE", 	static_cast<int>(Frustum::INSIDE));
-	declareConstant(typeObject,"INTERSECT", static_cast<int>(Frustum::INTERSECT));
-	declareConstant(typeObject,"OUTSIDE", 	static_cast<int>(Frustum::OUTSIDE));
+	declareConstant(typeObject,"INSIDE", 	static_cast<int>(Frustum::intersection_t::INSIDE));
+	declareConstant(typeObject,"INTERSECT", static_cast<int>(Frustum::intersection_t::INTERSECT));
+	declareConstant(typeObject,"OUTSIDE", 	static_cast<int>(Frustum::intersection_t::OUTSIDE));
 
 	// information
 
@@ -78,7 +78,7 @@ void E_Frustum::init(EScript::Namespace & lib) {
 
 	//! [ESMF] (INSIDE|INTERSECT|OUTSIDE) Frustum.isBoxInFrustum(Box)
 	ES_MFUN(typeObject,const Frustum,"isBoxInFrustum",1,1,
-			thisObj->isBoxInFrustum( parameter[0].to<const Box&>(rt) ))
+			static_cast<int>(thisObj->isBoxInFrustum( parameter[0].to<const Box&>(rt))))
 
 	//! [ESMF] bool Frustum.pointInFrustum(Vec3)
 	ES_MFUN(typeObject,const Frustum,"pointInFrustum",1,1,
