@@ -47,7 +47,10 @@ void E_Rect::init(EScript::Namespace & lib) {
 	})
 
 	// information
-
+	
+	//! [ESMF] Number Rect.getArea()
+	ES_MFUN(typeObject,const Rect,"getArea",0,0,thisObj->getArea())
+	
 	//! [ESMF] Number Rect.getX()
 	ES_MFUN(typeObject,const Rect,"getX",0,0,thisObj->getX())
 
