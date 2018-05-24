@@ -14,6 +14,7 @@
 
 #include <cstddef>
 #include <sstream>
+#include <limits>
 
 namespace EScript{
 template<> Geometry::Vec3 convertTo<Geometry::Vec3>(Runtime & rt,ObjPtr obj){
@@ -91,7 +92,10 @@ void E_Vec3::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] Number Vec3.dot(Vec3)
 	ES_MFUN(typeObject,const Vec3,"dot",	1,1,	thisObj->dot(parameter[0].to<Vec3>(rt)))
-
+	
+	//!	[ESMF] Bool Vec3.equals(Vec3, Number epsilon)
+	ES_MFUN(typeObject,const Vec3,"equals",1,2,thisObj->equals(parameter[0].to<Vec3>(rt), parameter[1].toFloat(std::numeric_limits<float>::epsilon())))
+	
 	//!	[ESMF] Vec3 Vec3.getNormalized()
 	ES_MFUN(typeObject,const Vec3,"getNormalized",0,0,thisObj->getNormalized())
 
