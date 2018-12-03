@@ -86,6 +86,9 @@ void E_Box::init(EScript::Namespace & lib) {
 	//! [ESMF] number E_Box.getExtentMax( )
 	ES_MFUN(typeObject,Box,"getExtentMax",0,0,thisObj->getExtentMax())
 
+	//! [ESMF] number E_Box.getExtentMin( )
+	ES_MFUN(typeObject,Box,"getExtentMin",0,0,thisObj->getExtentMin())
+		
 	//! [ESMF] number E_Box.getDiameter( )
 	ES_MFUN(typeObject,Box,"getDiameter",0,0,thisObj->getDiameter())
 
