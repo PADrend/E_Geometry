@@ -52,8 +52,8 @@ endif()
 target_link_libraries(E_Geometry LINK_PUBLIC Geometry)
 
 # Set version of library
-set_target_properties(E_Geometry PROPERTIES VERSION ${E_GEOMETRY_VERSION}
-                                            SOVERSION ${E_GEOMETRY_VERSION_MAJOR})
+set_target_properties(E_Geometry PROPERTIES VERSION ${E_Geometry_VERSION}
+                                            SOVERSION ${E_Geometry_VERSION_MAJOR})
 
 # Install the header files
 file(GLOB E_GEOMETRY_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
@@ -83,7 +83,7 @@ configure_package_config_file(E_GeometryConfig.cmake.in ${CMAKE_CURRENT_BINARY_D
                               NO_SET_AND_CHECK_MACRO
                               NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/E_GeometryConfigVersion.cmake
-                                 VERSION ${E_GEOMETRY_VERSION}
+                                 VERSION ${E_Geometry_VERSION}
                                  COMPATIBILITY SameMajorVersion)
 
 # Install the configuration files
@@ -93,13 +93,13 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/E_GeometryConfig.cmake ${CMAKE_CURRENT
 # Packaging
 include(InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_NAME "libgeometry${E_GEOMETRY_VERSION_MAJOR}-escript")
+set(CPACK_PACKAGE_NAME "libgeometry${E_Geometry_VERSION_MAJOR}-escript")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "E_Geometry library")
 set(CPACK_PACKAGE_VENDOR "Benjamin Eikel; Claudius Jaehn; Ralf Petring")
 set(CPACK_PACKAGE_CONTACT "Benjamin Eikel <benjamin@eikel.org>")
-set(CPACK_PACKAGE_VERSION_MAJOR ${E_GEOMETRY_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${E_GEOMETRY_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${E_GEOMETRY_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION_MAJOR ${E_Geometry_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${E_Geometry_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${E_Geometry_VERSION_PATCH})
 set(CPACK_PACKAGE_FILE_NAME "libE_Geometry")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_STRIP_FILES ON)
