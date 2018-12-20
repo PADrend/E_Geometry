@@ -107,7 +107,10 @@ void E_Box::init(EScript::Namespace & lib) {
 	//! [ESMF] Box E_Box.getIntersection( Box )
 	ES_MFUN(typeObject,const Box, "getIntersection", 1, 1,
 				 Intersection::getBoxBoxIntersection(*thisObj, parameter[0].to<const Box &>(rt)))
-
+	 
+ 	//! [ESMF] Vec3 E_Box.getMax( )
+ 	ES_MFUN(typeObject,Box,"getMax",0,0, thisObj->getMax())
+				
 	//! [ESMF] float E_Box.getMaxX( )
 	ES_MFUN(typeObject,Box,"getMaxX",0,0,	thisObj->getMaxX())
 
@@ -116,7 +119,10 @@ void E_Box::init(EScript::Namespace & lib) {
 
 	//! [ESMF] float E_Box.getMaxZ( )
 	ES_MFUN(typeObject,Box,"getMaxZ",0,0,	thisObj->getMaxZ())
-
+	
+	//! [ESMF] Vec3 E_Box.getMin( )
+	ES_MFUN(typeObject,Box,"getMin",0,0, thisObj->getMin())
+	
 	//! [ESMF] float E_Box.getMinX( )
 	ES_MFUN(typeObject,Box,"getMinX",0,0,	thisObj->getMinX())
 
