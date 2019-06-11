@@ -154,7 +154,12 @@ void E_Vec2::init(EScript::Namespace & lib) {
 			return thisObj->getY();
 		}
 	})
+	
+	//! [ESMF] Number Vec2[key]
+	ES_MFUN(typeObject,Vec2,"_get",1,1, (*thisObj)[parameter[0].toUInt()])
 
+	//! [ESMF] thisObj Vec2[key] = Number
+	ES_MFUN(typeObject,Vec2,"_set",2,2, ((*thisObj)[parameter[0].toUInt()] = parameter[1].toFloat(), thisEObj))
 }
 
 //---

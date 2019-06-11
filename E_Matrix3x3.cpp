@@ -143,6 +143,12 @@ void E_Matrix3x3::init(EScript::Namespace & lib) {
 				a->pushBack(EScript::create(thisObj->at(i,j)));
 		return a;
 	})
+	
+	//! [ESMF] Number Matrix3x3[key]
+	ES_MFUN(typeObject,const Matrix3x3,"_get",1,1, thisObj->at(parameter[0].toUInt()))
+
+	//! [ESMF] thisObj Matrix3x3[key] = Number
+	ES_MFUN(typeObject,Matrix3x3,"_set",2,2, (thisObj->set(parameter[0].toUInt(), parameter[1].toFloat()), thisEObj))
 }
 
 std::string E_Matrix3x3::toString() const {

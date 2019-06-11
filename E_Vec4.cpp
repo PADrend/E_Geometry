@@ -203,7 +203,13 @@ void E_Vec4::init(EScript::Namespace & lib) {
 		}else{
 			return thisObj->getZ();
 		}
-	})
+	})	
+	
+	//! [ESMF] Number Vec4[key]
+	ES_MFUN(typeObject,const Vec4,"_get",1,1, (*thisObj)[parameter[0].toUInt()])
+	
+	//! [ESMF] thisObj Vec4[key] = Number
+	ES_MFUN(typeObject,Vec4,"_set",2,2, ((*thisObj)[parameter[0].toUInt()] = parameter[1].toFloat(), thisEObj))
 }
 
 //---

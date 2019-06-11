@@ -177,7 +177,12 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 		}
 		return thisEObj;
 	})
+	
+	//! [ESMF] Number Matrix4x4[key]
+	ES_MFUN(typeObject,Matrix4x4,"_get",1,1, (*thisObj)[parameter[0].toUInt()])
 
+	//! [ESMF] thisObj Matrix4x4[key] = Number
+	ES_MFUN(typeObject,Matrix4x4,"_set",2,2, ((*thisObj)[parameter[0].toUInt()] = parameter[1].toFloat(), thisEObj))
 }
 
 std::string E_Matrix4x4::toString() const {
