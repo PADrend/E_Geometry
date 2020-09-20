@@ -17,7 +17,7 @@ class Namespace;
 }
 
 namespace E_Geometry {
-void init(EScript::Namespace * globals);
+EGEOMETRYAPI void init(EScript::Namespace * globals);
 }
 
 #endif // ELIBGEOMETRY_H
