@@ -52,6 +52,14 @@ if(NOT TARGET Geometry)
 endif()
 target_link_libraries(E_Geometry LINK_PUBLIC Geometry)
 
+if(MSVC)
+	target_compile_definitions(E_Geometry PRIVATE "EGEOMETRYAPI=__declspec(dllexport)")
+	target_compile_definitions(E_Geometry INTERFACE "EGEOMETRYAPI=__declspec(dllimport)")
+else()
+	target_compile_definitions(E_Geometry PRIVATE "EGEOMETRYAPI=")
+	target_compile_definitions(E_Geometry INTERFACE "EGEOMETRYAPI=")
+endif()
+
 # Set version of library
 set_target_properties(E_Geometry PROPERTIES VERSION ${E_Geometry_VERSION}
 																						SOVERSION ${E_Geometry_VERSION_MAJOR}
