@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Matrix3x3 : public EScript::ReferenceObject<Geometry::Matrix3x3> {
 		ES_PROVIDES_TYPE_NAME(Matrix3x3)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Matrix3x3(args&&... params) :
 			ReferenceObject_t(E_Matrix3x3::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Matrix3x3() {}
 
 		E_Matrix3x3 * clone() const override	{	return new E_Matrix3x3(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 

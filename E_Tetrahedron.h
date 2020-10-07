@@ -25,8 +25,8 @@ namespace E_Geometry {
 class E_Tetrahedron : public EScript::ReferenceObject<Geometry::Tetrahedron<float> > {
 		ES_PROVIDES_TYPE_NAME(Tetrahedron)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Tetrahedron(args&&... params) :
 			ReferenceObject_t(E_Tetrahedron::getTypeObject(),std::forward<args>(params)...) {}
@@ -34,7 +34,7 @@ class E_Tetrahedron : public EScript::ReferenceObject<Geometry::Tetrahedron<floa
 		}
 
 		E_Tetrahedron * clone() const override 	{	return new E_Tetrahedron(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 
 }

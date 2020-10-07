@@ -25,8 +25,8 @@ namespace E_Geometry {
 class E_Frustum : public EScript::ReferenceObject<Geometry::Frustum> {
 		ES_PROVIDES_TYPE_NAME(Frustum)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Frustum(args&&... params) :
 			ReferenceObject_t(E_Frustum::getTypeObject(),std::forward<args>(params)...) {}

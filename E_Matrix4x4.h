@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Matrix4x4 : public EScript::ReferenceObject<Geometry::Matrix4x4>  {
 		ES_PROVIDES_TYPE_NAME(Matrix4x4)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename ...args> explicit E_Matrix4x4(args&&... params) :
 			ReferenceObject_t(E_Matrix4x4::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Matrix4x4() {}
 
 		E_Matrix4x4 * clone() const override	{	return new E_Matrix4x4(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 

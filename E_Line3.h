@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Line3 : public EScript::ReferenceObject<Geometry::Line3> {
 		ES_PROVIDES_TYPE_NAME(Line3)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Line3(args&&... params) :
 			ReferenceObject_t(E_Line3::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Line3() {}
 
 		E_Line3 * clone() const override		{	return new E_Line3(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 
