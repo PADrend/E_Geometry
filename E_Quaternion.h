@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Quaternion : public EScript::ReferenceObject<Geometry::Quaternion> {
 		ES_PROVIDES_TYPE_NAME(Quaternion)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Quaternion(args&&... params) :
 			ReferenceObject_t(E_Quaternion::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Quaternion()	{}
 
 		E_Quaternion * clone() const override	{	return new E_Quaternion(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 

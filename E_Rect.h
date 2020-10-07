@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Rect : public EScript::ReferenceObject<Geometry::Rect>  {
 		ES_PROVIDES_TYPE_NAME(Rect)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Rect(args&&... params) :
 			ReferenceObject_t(E_Rect::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Rect() {}
 
 		E_Rect * clone() const override		{	return new E_Rect(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 

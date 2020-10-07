@@ -35,8 +35,8 @@ class E_PointOctree : public EScript::ReferenceObject<PointOctree_EObj,
 													  EScript::Policies::SameEObjects_ComparePolicy>  {
 		ES_PROVIDES_TYPE_NAME(PointOctree)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename ... Types>
 		explicit E_PointOctree(Types && ... params) :

@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Vec3 : public EScript::ReferenceObject<Geometry::Vec3> {
 		ES_PROVIDES_TYPE_NAME(Vec3)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Vec3(args&&... params) :
 			ReferenceObject_t(E_Vec3::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Vec3() {}
 
 		E_Vec3 * clone() const override		{	return new E_Vec3(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 

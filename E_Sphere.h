@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Sphere : public EScript::ReferenceObject<Geometry::Sphere_f> {
 		ES_PROVIDES_TYPE_NAME(Sphere)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Sphere(args&&... params) :
 			ReferenceObject_t(E_Sphere::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Sphere() {}
 
 		E_Sphere * clone() const override 		{	return new E_Sphere(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 

@@ -25,15 +25,15 @@ namespace E_Geometry {
 class E_Segment3 : public EScript::ReferenceObject<Geometry::Segment3> {
 		ES_PROVIDES_TYPE_NAME(Segment3)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EGEOMETRYAPI static EScript::Type * getTypeObject();
+		EGEOMETRYAPI static void init(EScript::Namespace & lib);
 
 		template<typename...args> explicit E_Segment3(args&&... params) :
 			ReferenceObject_t(E_Segment3::getTypeObject(),std::forward<args>(params)...) {}
 		virtual ~E_Segment3() {}
 
 		E_Segment3 * clone() const override		{	return new E_Segment3(**this);	}
-		std::string toString() const override;
+		EGEOMETRYAPI std::string toString() const override;
 };
 }
 
