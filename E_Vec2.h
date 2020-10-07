@@ -44,7 +44,7 @@ ES_CONV_OBJ_TO_EOBJ(const Geometry::Vec2&, 	E_Geometry::E_Vec2,		new E_Geometry:
 ES_CONV_OBJ_TO_EOBJ(Geometry::Vec2&&, 		E_Geometry::E_Vec2,		new E_Geometry::E_Vec2(obj))
 
 namespace EScript{ // automatic conversion functions
-template<> Geometry::Vec2 convertTo<Geometry::Vec2>(Runtime & rt,ObjPtr obj);
+template<> EGEOMETRYAPI Geometry::Vec2 convertTo<Geometry::Vec2>(Runtime & rt,ObjPtr obj);
 }
 
 #endif // __EVec2_H
