@@ -78,6 +78,17 @@ void E_Sphere::init(EScript::Namespace & lib) {
 	//! [ESMF] self Sphere.setRadius(Vec3)
 	ES_MFUN(typeObject,Sphere_f, "setRadius", 1, 1,
 				(thisObj->setRadius(parameter[0].to<float>(rt)),thisEObj))
+
+	//! [ESMF] self Sphere.include(Vec3|Sphere)
+	ES_MFUNCTION(typeObject,Sphere_f, "include", 1, 1, {
+		E_Vec3 * ev=parameter[0].toType<E_Vec3>();
+		if(ev) {
+			thisObj->include(**ev);
+		} else {
+			thisObj->include(parameter[0].to<const Sphere_f&>(rt));
+		}
+		return thisEObj;
+	})
 }
 
 std::string E_Sphere::toString() const {
