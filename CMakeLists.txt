@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(GNUInstallDirs)
 set(CMAKE_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/E_Geometry)
 
-add_library(E_Geometry
+add_library(E_Geometry SHARED
 	E_Box.cpp
 	ELibGeometry.cpp
 	E_Frustum.cpp
