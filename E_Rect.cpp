@@ -92,7 +92,7 @@ void E_Rect::init(EScript::Namespace & lib) {
 	ES_MFUNCTION(typeObject,const Rect,"contains",1,2, {
 		const Rect & r=*thisObj;
 		if(parameter.count()>1){
-			return r.contains(parameter[0].to<double>(rt),parameter[1].to<double>(rt));
+			return r.contains(parameter[0].to<float>(rt),parameter[1].to<float>(rt));
 		}else if(E_Rect * er2=parameter[0].toType<E_Rect>()){
 			return r.contains(**er2);
 		}else{
@@ -105,7 +105,7 @@ void E_Rect::init(EScript::Namespace & lib) {
 	//!	[ESMF] self E_Rect.setPosition( (x,y)|vec2 )
 	ES_MFUNCTION(typeObject,Rect,"setPosition",1,2, {
 		if(parameter.count()>1){
-			thisObj->setPosition(parameter[0].to<double>(rt),parameter[1].to<double>(rt));
+			thisObj->setPosition(parameter[0].to<float>(rt),parameter[1].to<float>(rt));
 		}else {
 			thisObj->setPosition(parameter[0].to<Vec2>(rt));
 		}
@@ -133,7 +133,7 @@ void E_Rect::init(EScript::Namespace & lib) {
 	//!	[ESMF] self E_Rect.moveRel( (x,y)|vec2 )
 	ES_MFUNCTION(typeObject,Rect,"moveRel",1,2, {
 		if(parameter.count()>1){
-			thisObj->moveRel(parameter[0].to<double>(rt),parameter[1].to<double>(rt));
+			thisObj->moveRel(parameter[0].to<float>(rt),parameter[1].to<float>(rt));
 		}else {
 			thisObj->moveRel(parameter[0].to<Vec2>(rt));
 		}
@@ -149,7 +149,7 @@ void E_Rect::init(EScript::Namespace & lib) {
 	//!	[ESMF] self E_Rect.changeSize( (x,y)|vec2 )
 	ES_MFUNCTION(typeObject,Rect,"changeSize",1,2, {
 		if(parameter.count()>1){
-			thisObj->changeSize(parameter[0].to<double>(rt),parameter[1].to<double>(rt));
+			thisObj->changeSize(parameter[0].to<float>(rt),parameter[1].to<float>(rt));
 		}else {
 			const Vec2 & pos=parameter[0].to<Vec2>(rt);
 			thisObj->changeSize(pos);
@@ -160,7 +160,7 @@ void E_Rect::init(EScript::Namespace & lib) {
 	//!	[ESMF] self E_Rect.changeSizeCentered( (x,y)|vec2 )
 	ES_MFUNCTION(typeObject,Rect,"changeSizeCentered",1,2, {
 		if(parameter.count()>1){
-			thisObj->changeSizeCentered(parameter[0].to<double>(rt),parameter[1].to<double>(rt));
+			thisObj->changeSizeCentered(parameter[0].to<float>(rt),parameter[1].to<float>(rt));
 		}else {
 			const Vec2 & pos=parameter[0].to<Vec2>(rt);
 			thisObj->changeSizeCentered(pos);
@@ -171,7 +171,7 @@ void E_Rect::init(EScript::Namespace & lib) {
 	//!	[ESMF] self E_Rect.include( (x,y)|vec2 )
 	ES_MFUNCTION(typeObject,Rect,"include",1,2, {
 		if(parameter.count()>1){
-			thisObj->include(parameter[0].to<double>(rt),parameter[1].to<double>(rt));
+			thisObj->include(parameter[0].to<float>(rt),parameter[1].to<float>(rt));
 		}else {
 			const Vec2 & pos=parameter[0].to<Vec2>(rt);
 			thisObj->include(pos);

@@ -19,7 +19,7 @@ namespace EScript{
 template<> Geometry::Vec2 convertTo<Geometry::Vec2>(Runtime & rt,ObjPtr obj){
 	Array * arr = obj.toType<Array>();
 	if(arr){
-		return Geometry::Vec2( arr->at(0).toDouble(), arr->at(1).toDouble() );
+		return Geometry::Vec2( arr->at(0).toFloat(), arr->at(1).toFloat() );
 	}
 	return Geometry::Vec2(**assertType<E_Geometry::E_Vec2>(rt,obj));
 }
@@ -78,10 +78,10 @@ void E_Vec2::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Vec2,"-=",1,1,(*thisObj -= (parameter[0].to<Vec2>(rt)),thisEObj))
 
 	//! [ESMF] E_Vec2 E_Vec2.*=(Number)
-	ES_MFUN(typeObject,Vec2,"*=",1,1,(*thisObj *= parameter[0].to<double>(rt),thisEObj))
+	ES_MFUN(typeObject,Vec2,"*=",1,1,(*thisObj *= parameter[0].to<float>(rt),thisEObj))
 
 	//! [ESMF] E_Vec2 E_Vec2./=(Number)
-	ES_MFUN(typeObject,Vec2,"/=",1,1,(*thisObj /= parameter[0].to<double>(rt),thisEObj))
+	ES_MFUN(typeObject,Vec2,"/=",1,1,(*thisObj /= parameter[0].to<float>(rt),thisEObj))
 
 	//! [ESMF] bool E_Vec2.isZero()
 	ES_MFUN(typeObject,Vec2,"isZero",0,0,thisObj->isZero())

@@ -40,8 +40,8 @@ void E_Frustum::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Frustum new Frustum( [float angle=60,float ratio=1.0,float nearD=0.1,float farD=1000.0] )
 	ES_CTOR(typeObject,0,4,
-			Frustum(Angle::deg(parameter[0].toFloat(60.0)),
-											parameter[1].toFloat(1.0),parameter[2].toFloat(0.1),parameter[3].toFloat(1000.0)))
+			Frustum(Angle::deg(parameter[0].toFloat(60.0f)),
+											parameter[1].toFloat(1.0f),parameter[2].toFloat(0.1f),parameter[3].toFloat(1000.0f)))
 
 	//! [ESMF] Vec3 Frustum.getPos()
 	ES_MFUN(typeObject,const Frustum,"getPos",0,0,std::move(thisObj->getPos()))

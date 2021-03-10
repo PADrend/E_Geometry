@@ -19,7 +19,7 @@ namespace EScript{
 template<> Geometry::Vec4 convertTo<Geometry::Vec4>(Runtime & rt,ObjPtr obj){
 	Array * arr = obj.toType<Array>();
 	if(arr){
-		return Geometry::Vec4( arr->at(0).toDouble(), arr->at(1).toDouble(), arr->at(2).toDouble(), arr->at(3).toDouble());
+		return Geometry::Vec4( arr->at(0).toFloat(), arr->at(1).toFloat(), arr->at(2).toFloat(), arr->at(3).toFloat());
 	}
 	return Geometry::Vec4(**assertType<E_Geometry::E_Vec4>(rt,obj));
 }
@@ -54,9 +54,9 @@ void E_Vec4::init(EScript::Namespace & lib) {
 			}
 
 		}else if(parameter.count()==4){
-			return new E_Vec4(Vec4(parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt),parameter[3].to<double>(rt)));
+			return new E_Vec4(Vec4(parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt),parameter[3].to<float>(rt)));
 		}else if(parameter.count()==2){
-			return new E_Vec4(Vec4(parameter[0].to<Vec3>(rt), parameter[1].to<double>(rt) ));
+			return new E_Vec4(Vec4(parameter[0].to<Vec3>(rt), parameter[1].to<float>(rt) ));
 		}else {
 			if(parameter.count()!=0){
 				rt.warn("new Vec4: Wrong parameter count!");
@@ -132,7 +132,7 @@ void E_Vec4::init(EScript::Namespace & lib) {
 				thisObj->setValue(a->at(0).toFloat(), a->at(1).toFloat(), a->at(2).toFloat(), a->at(3).toFloat());
 			}
 		}else if(parameter.count()==2){
-			*thisObj = Vec4(parameter[0].to<Vec3>(rt), parameter[1].to<double>(rt) );
+			*thisObj = Vec4(parameter[0].to<Vec3>(rt), parameter[1].to<float>(rt) );
 		}else {
 			assertParamCount(rt,parameter,4,4);
 			thisObj->setValue(parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt),parameter[3].to<float>(rt));

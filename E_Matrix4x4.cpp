@@ -91,17 +91,17 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self Matrix4x4.rotate(deg,x,y,z)
 	ES_MFUN(typeObject,Matrix4x4,"rotate",4,4,(thisObj->
-			rotate_deg(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
-					   parameter[2].to<double>(rt),parameter[3].to<double>(rt)),thisEObj))
+			rotate_deg(parameter[0].to<float>(rt),parameter[1].to<float>(rt),
+					   parameter[2].to<float>(rt),parameter[3].to<float>(rt)),thisEObj))
 
 	//! [ESMF] self Matrix4x4.rotate_deg(deg,  (x,y,z)| Vec3 )
 	ES_MFUNCTION(typeObject,Matrix4x4,"rotate_deg",2,4,{
 		if(parameter.count()==2){
-			thisObj->rotate_deg(parameter[0].to<double>(rt),parameter[1].to<Geometry::Vec3>(rt));
+			thisObj->rotate_deg(parameter[0].to<float>(rt),parameter[1].to<Geometry::Vec3>(rt));
 		}else{
 			assertParamCount(rt,parameter.count(),4,4);
-			thisObj->rotate_deg(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
-					   parameter[2].to<double>(rt),parameter[3].to<double>(rt));
+			thisObj->rotate_deg(parameter[0].to<float>(rt),parameter[1].to<float>(rt),
+					   parameter[2].to<float>(rt),parameter[3].to<float>(rt));
 		}
 		return thisEObj;
 	})
@@ -109,11 +109,11 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	//! [ESMF] self Matrix4x4.rotate_rad(deg,  (x,y,z)| Vec3 )
 	ES_MFUNCTION(typeObject,Matrix4x4,"rotate_rad",2,4,{
 		if(parameter.count()==2){
-			thisObj->rotate_rad(parameter[0].to<double>(rt),parameter[1].to<Geometry::Vec3>(rt));
+			thisObj->rotate_rad(parameter[0].to<float>(rt),parameter[1].to<Geometry::Vec3>(rt));
 		}else{
 			assertParamCount(rt,parameter.count(),4,4);
-			thisObj->rotate_rad(parameter[0].to<double>(rt),parameter[1].to<double>(rt),
-					   parameter[2].to<double>(rt),parameter[3].to<double>(rt));
+			thisObj->rotate_rad(parameter[0].to<float>(rt),parameter[1].to<float>(rt),
+					   parameter[2].to<float>(rt),parameter[3].to<float>(rt));
 		}
 		return thisEObj;
 	})
@@ -121,7 +121,7 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	//! [ESMF] Matrix4x4 Matrix4x4.scale(x,y,z)
 	ES_MFUNCTION(typeObject,Matrix4x4,"scale",3,3,{
 		thisObj->scale(
-			parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt));
+			parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt));
 		return thisEObj;
 	})
 
@@ -134,8 +134,8 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	//! [ESMF] Vec3 Matrix4x4.transformDirection(E_Vec3|x,y,z)
 	ES_MFUNCTION(typeObject,const Matrix4x4,"transformDirection",1,3,{
 		if(parameter.count() == 3){
-			return EScript::create(thisObj->transformDirection(parameter[0].to<double>(rt),
-										parameter[1].to<double>(rt),parameter[2].to<double>(rt)));
+			return EScript::create(thisObj->transformDirection(parameter[0].to<float>(rt),
+										parameter[1].to<float>(rt),parameter[2].to<float>(rt)));
 		}
 		return EScript::create(thisObj->transformDirection(parameter[0].to<Vec3>(rt)));
 	})
@@ -143,8 +143,8 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	//! [ESMF] Vec3 Matrix4x4.transformPosition(E_Vec3|x,y,z)
 	ES_MFUNCTION(typeObject,const Matrix4x4,"transformPosition",1,3,{
 		if(parameter.count() == 3){
-			return EScript::create(thisObj->transformPosition(parameter[0].to<double>(rt),
-										parameter[1].to<double>(rt),parameter[2].to<double>(rt)));
+			return EScript::create(thisObj->transformPosition(parameter[0].to<float>(rt),
+										parameter[1].to<float>(rt),parameter[2].to<float>(rt)));
 		}
 		return EScript::create(thisObj->transformPosition(parameter[0].to<Vec3>(rt)));
 	})
@@ -170,7 +170,7 @@ void E_Matrix4x4::init(EScript::Namespace & lib) {
 	ES_MFUNCTION(typeObject,Matrix4x4,"translate",1,3,{
 		if(parameter.count() == 3){
 			thisObj->translate(
-			parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt));
+			parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt));
 		}
 		else{
 			thisObj->translate(parameter[0].to<Vec3>(rt));

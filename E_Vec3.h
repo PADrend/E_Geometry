@@ -37,7 +37,7 @@ class E_Vec3 : public EScript::ReferenceObject<Geometry::Vec3> {
 };
 }
 
-ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Vec3,		Geometry::_Vec3<int32_t>, Geometry::_Vec3<int32_t>(	(**eObj).x(), (**eObj).y(), (**eObj).z()))
+ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Vec3,		Geometry::Vec3i, Geometry::Vec3i(	(**eObj)))
 ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Vec3,		Geometry::Vec3&,		**eObj)
 ES_CONV_EOBJ_TO_OBJ(E_Geometry::E_Vec3,		Geometry::Vec3*,		&**eObj)
 ES_CONV_OBJ_TO_EOBJ(const Geometry::Vec3&, 	E_Geometry::E_Vec3,		new E_Geometry::E_Vec3(obj))

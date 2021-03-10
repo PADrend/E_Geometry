@@ -44,7 +44,7 @@ void E_Quaternion::init(EScript::Namespace & lib) {
 			}
 
 		}else if(parameter.count()==4){
-			return new E_Quaternion(parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt),parameter[3].to<double>(rt));
+			return new E_Quaternion(parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt),parameter[3].to<float>(rt));
 		}else {
 			if(parameter.count()!=0){
 				rt.warn("new Quaternion(): Wrong parameter count!");

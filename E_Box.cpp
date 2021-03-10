@@ -57,7 +57,7 @@ void E_Box::init(EScript::Namespace & lib) {
 	//! [ESMF] bool E_Box.contains( (x,y,z)|vec3|E_Box )
 	ES_MFUNCTION(typeObject,Box,"contains",1,3,{
 		if(parameter.count()>1){
-			return thisObj->contains(parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt));
+			return thisObj->contains(parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt));
 		}
 		E_Vec3 * ev3=parameter[0].toType<E_Vec3>();
 		if(ev3){

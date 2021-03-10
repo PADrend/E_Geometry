@@ -20,7 +20,7 @@ namespace EScript{
 template<> Geometry::Vec3 convertTo<Geometry::Vec3>(Runtime & rt,ObjPtr obj){
 	Array * arr = obj.toType<Array>();
 	if(arr){
-		return Geometry::Vec3( arr->at(0).toDouble(), arr->at(1).toDouble(), arr->at(2).toDouble() );
+		return Geometry::Vec3( arr->at(0).toFloat(), arr->at(1).toFloat(), arr->at(2).toFloat() );
 	}
 	return Geometry::Vec3(**assertType<E_Geometry::E_Vec3>(rt,obj));
 }
@@ -45,7 +45,7 @@ void E_Vec3::init(EScript::Namespace & lib) {
 		if(parameter.count()==1){
 			return EScript::create(parameter[0].to<Vec3>(rt));
 		}else if(parameter.count()==3){
-			return new E_Vec3(parameter[0].to<double>(rt),parameter[1].to<double>(rt),parameter[2].to<double>(rt));
+			return new E_Vec3(parameter[0].to<float>(rt),parameter[1].to<float>(rt),parameter[2].to<float>(rt));
 		}else {
 			if(parameter.count()!=0){
 				rt.warn("new Vec3(): Wrong parameter count!");
