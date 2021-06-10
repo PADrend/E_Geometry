@@ -69,13 +69,19 @@ void E_Rect::init(EScript::Namespace & lib) {
 	//! [ESMF] Number Rect.getMaxY()
 	ES_MFUN(typeObject,const Rect,"getMaxY",0,0,thisObj->getMaxY())
 
+	//! [ESMF] Vec2 Rect.getPosition()
+	ES_MFUN(typeObject,const Rect,"getPosition",0,0,std::move(thisObj->getPosition()))
+
 	//! [ESMF] Number Rect.getWidth()
 	ES_MFUN(typeObject,const Rect,"getWidth",0,0,thisObj->getWidth())
 
 	//! [ESMF] Number Rect.getHeight()
 	ES_MFUN(typeObject,const Rect,"getHeight",0,0,thisObj->getHeight())
 
-	//! [ESMF] Number Rect.getHeight()
+	//! [ESMF] Vec2 Rect.getSize()
+	ES_MFUN(typeObject,const Rect,"getSize",0,0,std::move(thisObj->getSize()))
+
+	//! [ESMF] Vec2 Rect.getHeight()
 	ES_MFUN(typeObject,const Rect,"getCenter",0,0,std::move(thisObj->getCenter()))
 
 	//! [ESMF] Bool Rect.isInvalid()
